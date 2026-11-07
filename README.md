@@ -1,12 +1,12 @@
 # Seven Seats; CS 417 Open Project Fall 2026 Team 6
 
-## Contributors
-- Alyssa
-- Dylan
-- Jinwon
-- Osmond
-- Rishi
-- Sharyq
+## Contributors and their contributions
+- Alyssa: 
+- Dylan: 
+- Jinwon: 
+- Osmond: 
+- Rishi: 
+- Sharyq: 
 
 ## Basic rules
 1. Make sure you put all your files in `Assets/_<name>/`.
