@@ -3,7 +3,7 @@
 ## Contributors and their contributions
 - Alyssa: 
 - Dylan: 
-- Jinwon: 
+- Jiwon: 
 - Osmond: 
 - Rishi: 
 - Sharyq: 
