@@ -1,0 +1,92 @@
+using UnityEngine;
+using UnityEngine.Events;
+using Shared;
+
+namespace Alyssa
+{
+    public class Cuttable : MonoBehaviour
+    {
+        [System.Serializable]
+        public class Result
+        {
+            public GameObject prefab;
+            public Vector3 localOffset;
+            public string resourceName;
+            public int resourceAmount = 1;
+        }
+
+        [Header("Cutting")]
+        public int hitsRequired = 1;
+        public float minKnifeSpeed = 1f;
+        public float hitCooldown = 0.35f;
+        public bool requiresBoard = true;
+
+        [Header("Results")]
+        public Result[] perHitResults;
+        public Result[] finalResults;
+        public GameObject[] hideOnHit;
+        public float popForce = 0.5f;
+
+        [Header("Events")]
+        public UnityEvent onHit;
+        public UnityEvent onFinalCut;
+        public UnityEvent onTooSlow;
+        public UnityEvent onNotOnBoard;
+
+        [HideInInspector] public int boardContacts;
+
+        int hits;
+        float lastHitTime = -10f;
+
+        public void TryHit(float knifeSpeed)
+        {
+            if (requiresBoard && boardContacts <= 0) { onNotOnBoard.Invoke(); return; }
+            if (Time.time - lastHitTime < hitCooldown) return;
+            if (knifeSpeed < minKnifeSpeed) { onTooSlow.Invoke(); return; }
+
+            lastHitTime = Time.time;
+
+            if (perHitResults != null && hits < perHitResults.Length) Spawn(perHitResults[hits]);
+            if (hideOnHit != null && hits < hideOnHit.Length && hideOnHit[hits] != null)
+                hideOnHit[hits].SetActive(false);
+
+            hits++;
+            onHit.Invoke();
+
+            if (hits >= hitsRequired) FinalCut();
+        }
+
+        void FinalCut()
+        {
+            onFinalCut.Invoke();
+            if (finalResults != null)
+                foreach (Result r in finalResults) Spawn(r);
+            Destroy(gameObject);
+        }
+
+        void Spawn(Result r)
+        {
+            if (r.prefab != null)
+            {
+                Vector3 pos = transform.TransformPoint(r.localOffset);
+                GameObject go = Instantiate(r.prefab, pos, transform.rotation, SceneRoot.Root);
+
+                // New pieces inherit freshness and start decaying once cut
+                Freshness parentFresh = GetComponent<Freshness>();
+                Freshness newFresh = go.GetComponent<Freshness>();
+                if (newFresh != null)
+                {
+                    if (parentFresh != null) newFresh.value = parentFresh.value;
+                    newFresh.isDecaying = true;
+                }
+
+                Rigidbody rb = go.GetComponent<Rigidbody>();
+                if (rb != null)
+                    rb.AddForce((pos - transform.position).normalized * popForce, ForceMode.Impulse);
+            }
+
+            if (!string.IsNullOrEmpty(r.resourceName) && ResourceManager.Instance != null)
+                ResourceManager.Instance.Add(r.resourceName, r.resourceAmount);
+        }
+    }
+}
