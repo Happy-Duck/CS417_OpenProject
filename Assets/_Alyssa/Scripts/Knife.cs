@@ -37,8 +37,15 @@ namespace Alyssa
 
         void OnTriggerEnter(Collider other)
         {
+            CutZone zone = other.GetComponent<CutZone>();
+            if (zone != null)
+            {
+                zone.Hit(Speed);
+                return;
+            }
+
             Cuttable target = other.GetComponentInParent<Cuttable>();
-            if (target != null) target.TryHit(Speed);
+            if (target != null) target.TryHit(Speed, false);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace Alyssa
         public float minKnifeSpeed = 1f;
         public float hitCooldown = 0.35f;
         public bool requiresBoard = true;
+        public bool requireZone;
 
         [Header("Results")]
         public Result[] perHitResults;
@@ -32,14 +33,25 @@ namespace Alyssa
         public UnityEvent onFinalCut;
         public UnityEvent onTooSlow;
         public UnityEvent onNotOnBoard;
+        public UnityEvent onWrongSpot;
 
         [HideInInspector] public int boardContacts;
 
         int hits;
         float lastHitTime = -10f;
+        float lastZoneTime = -10f;
+        bool wrongSpotPending;
 
-        public void TryHit(float knifeSpeed)
+        public void TryHit(float knifeSpeed, bool viaZone = false)
         {
+            if (viaZone) lastZoneTime = Time.time;
+
+            if (requireZone && !viaZone)
+            {
+                if (knifeSpeed >= minKnifeSpeed) wrongSpotPending = true;
+                return;
+            }
+
             if (requiresBoard && boardContacts <= 0) { onNotOnBoard.Invoke(); return; }
             if (Time.time - lastHitTime < hitCooldown) return;
             if (knifeSpeed < minKnifeSpeed) { onTooSlow.Invoke(); return; }
@@ -54,6 +66,15 @@ namespace Alyssa
             onHit.Invoke();
 
             if (hits >= hitsRequired) FinalCut();
+        }
+
+        void Update()
+        {
+            if (!wrongSpotPending) return;
+
+            wrongSpotPending = false;
+            // A zone hit in the same swing means the body touch was just the blade passing through
+            if (Time.time - lastZoneTime > 0.1f) onWrongSpot.Invoke();
         }
 
         void FinalCut()
