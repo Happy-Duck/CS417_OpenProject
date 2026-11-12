@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace Shared{
     public static class ResourceManager2
     {
-        // Adds an amount of a resource, can also add a negative amount, but it never goes under zero
+        // Adds or subtracts an amount without going below the resource's minimum.
         public static void Add(this Resource resource, float amount)
         {
             resource.Value += amount;

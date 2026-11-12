@@ -1,19 +1,23 @@
 # Resource System
 
-I'd like to propose a replacement of the string-based ResourceManager with this asset-based version. Let me know what you think.
-
-- `Resource.cs` stores a resource's quantity, limits, optional prefab, and change event.
+- `Resource.cs` stores a resource's quantity, minimum, optional prefab, and change event.
 - `ResourceManager2.cs` provides extension methods. No manager GameObject is needed.
 
 ## Setup
 
 1. In the Project window, right-click > **Create > Scriptable Objects > Resource**.
 2. Name the asset `Salmon`, `Rice`, etc., following the project's folder and naming rules.
-3. Set **Initial Value**, **Min Value**, and **Max Value** in the Inspector. For example: `10`, `0`, `100`. Keep Min <= Max.
+3. Set **Initial Value** and **Min Value** in the Inspector, for example `10` and `0`. Values cannot fall below Min Value; there is no upper limit. An initial value below the minimum is raised to the minimum.
 4. Optionally drag an existing prefab into **Prefab**, or leave it as None.
 5. Drag the resource asset into your script's Resource field. Everyone sharing a quantity must reference the same asset.
 
 Inspector settings override the script's field defaults. `Salmon.asset` and `Rice.asset` are included as examples.
+
+## Across scenes
+
+Loaded resources use `HideFlags.DontUnloadUnusedAsset`, so scene changes and `Resources.UnloadUnusedAssets()` do not discard their quantities, even when an intermediate scene does not reference them. Reference the same asset in each scene; no manager GameObject is needed.
+
+Call `salmon.ResetValue()` only when you want to restore its initial quantity. This keeps loaded resource assets resident in memory; it is not save/load support for restarting the application. Do not explicitly destroy or unload these assets during gameplay.
 
 ## Usage
 
@@ -45,7 +49,9 @@ bool canCook = costs.CanAfford();
 if (costs.TrySpend()) Debug.Log("Cooked salmon with rice.");
 ```
 
-All value changes are clamped to Min/Max. `TrySpend` checks first and leaves quantities unchanged if a cost cannot be afforded. Spending cannot go below Min; zero or negative costs do nothing and succeed. Batch spending checks all costs before deducting them; event listeners should not change those resources during deduction.
+All value changes respect Min Value. `Add(-amount)` stops at the minimum; `TrySpend(amount)` rejects the cost instead if it would go below the minimum. For example, with Value `10` and Min Value `5`, `TrySpend(6f)` fails and leaves `10`, while `Add(-6f)` leaves `5`.
+
+Zero or negative costs do nothing and succeed. Batch spending checks all costs before deducting them; event listeners should not change those resources during deduction.
 
 For UI updates, subscribe to the resource's event and unsubscribe when disabled:
 

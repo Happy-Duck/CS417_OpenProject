@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6d08da54994544cbbd78dc3163c150, type: 3}
   m_Name: Rice
   m_EditorClassIdentifier: Assembly-CSharp::Shared.Resource
-  initialValue: 0
+  resourceId: Rice
+  initialValue: 2
   minValue: 0
-  maxValue: 100
+  maxValue: 50
   prefab: {fileID: 0}

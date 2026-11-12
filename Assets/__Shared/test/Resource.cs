@@ -8,7 +8,6 @@ namespace Shared{
         [SerializeField] private float initialValue;
         [NonSerialized] private float runtimeValue;
         [SerializeField] public float minValue = 0f;
-        [SerializeField] public float maxValue = 100f;
         [SerializeField] private GameObject prefab;
 
         public GameObject Prefab => prefab;
@@ -19,15 +18,21 @@ namespace Shared{
             get => runtimeValue;
             set
             {
-                float clamped = Mathf.Clamp(value, minValue, maxValue);
-                if (runtimeValue == clamped) return;
+                float v = Mathf.Max(value, minValue);
+                if (runtimeValue == v) return;
 
-                runtimeValue = clamped;
+                runtimeValue = v;
                 OnResourceChanged?.Invoke(runtimeValue);
             }
         }
 
         private void OnEnable()
+        {
+            hideFlags |= HideFlags.DontUnloadUnusedAsset;
+            Value = initialValue;
+        }
+
+        public void ResetValue()
         {
             Value = initialValue;
         }

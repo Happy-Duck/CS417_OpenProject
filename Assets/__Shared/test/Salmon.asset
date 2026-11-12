@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6d08da54994544cbbd78dc3163c150, type: 3}
   m_Name: Salmon
   m_EditorClassIdentifier: Assembly-CSharp::Shared.Resource
-  initialValue: 0
+  resourceId: Salmon
+  initialValue: 5
   minValue: 0
   maxValue: 100
+  prefab: {fileID: 0}
