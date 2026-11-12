@@ -12,6 +12,7 @@ namespace Alyssa
             public GameObject prefab;
             public Transform spawnAt;
             public Vector3 localOffset;
+            public Vector3 localEuler;
             public string resourceName;
             public int resourceAmount = 1;
         }
@@ -22,6 +23,8 @@ namespace Alyssa
         public float hitCooldown = 0.35f;
         public bool requiresBoard = true;
         public bool requireZone;
+        public GameObject[] blockers;
+        public float unblockDelay = 1f;
 
         [Header("Results")]
         public Result[] perHitResults;
@@ -35,12 +38,16 @@ namespace Alyssa
         public UnityEvent onTooSlow;
         public UnityEvent onNotOnBoard;
         public UnityEvent onWrongSpot;
+        public UnityEvent onBlocked;
 
         [HideInInspector] public int boardContacts;
 
         int hits;
         float lastHitTime = -10f;
         float lastZoneTime = -10f;
+        float lastBlockedTime = -10f;
+        float unblockedTime = -10f;
+        bool wasBlocked;
         bool wrongSpotPending;
 
         public void TryHit(float knifeSpeed, bool viaZone = false)
@@ -52,6 +59,18 @@ namespace Alyssa
                 if (knifeSpeed >= minKnifeSpeed) wrongSpotPending = true;
                 return;
             }
+
+            if (IsBlocked())
+            {
+                if (knifeSpeed >= minKnifeSpeed && Time.time - lastBlockedTime > hitCooldown)
+                {
+                    lastBlockedTime = Time.time;
+                    onBlocked.Invoke();
+                }
+                return;
+            }
+
+            if (Time.time - unblockedTime < unblockDelay) return;
 
             if (requiresBoard && boardContacts <= 0) { onNotOnBoard.Invoke(); return; }
             if (Time.time - lastHitTime < hitCooldown) return;
@@ -69,8 +88,25 @@ namespace Alyssa
             if (hits >= hitsRequired) FinalCut();
         }
 
+        bool IsBlocked()
+        {
+            if (blockers == null) return false;
+            foreach (GameObject b in blockers)
+                if (b != null) return true;
+            return false;
+        }
+
+        void Start()
+        {
+            wasBlocked = IsBlocked();
+        }
+
         void Update()
         {
+            bool blocked = IsBlocked();
+            if (wasBlocked && !blocked) unblockedTime = Time.time;
+            wasBlocked = blocked;
+
             if (!wrongSpotPending) return;
 
             wrongSpotPending = false;
@@ -98,6 +134,7 @@ namespace Alyssa
                     pos = rend != null ? rend.bounds.center : r.spawnAt.position;
                     rot = r.spawnAt.rotation;
                 }
+                rot *= Quaternion.Euler(r.localEuler);
                 GameObject go = Instantiate(r.prefab, pos, rot, SceneRoot.Root);
 
                 // New pieces inherit freshness and start decaying once cut
