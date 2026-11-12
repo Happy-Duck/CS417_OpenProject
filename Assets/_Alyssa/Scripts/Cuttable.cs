@@ -10,6 +10,7 @@ namespace Alyssa
         public class Result
         {
             public GameObject prefab;
+            public Transform spawnAt;
             public Vector3 localOffset;
             public string resourceName;
             public int resourceAmount = 1;
@@ -90,10 +91,17 @@ namespace Alyssa
             if (r.prefab != null)
             {
                 Vector3 pos = transform.TransformPoint(r.localOffset);
-                GameObject go = Instantiate(r.prefab, pos, transform.rotation, SceneRoot.Root);
+                Quaternion rot = transform.rotation;
+                if (r.spawnAt != null)
+                {
+                    Renderer rend = r.spawnAt.GetComponentInChildren<Renderer>();
+                    pos = rend != null ? rend.bounds.center : r.spawnAt.position;
+                    rot = r.spawnAt.rotation;
+                }
+                GameObject go = Instantiate(r.prefab, pos, rot, SceneRoot.Root);
 
                 // New pieces inherit freshness and start decaying once cut
-                Freshness parentFresh = GetComponent<Freshness>();
+                Freshness parentFresh = GetComponentInParent<Freshness>();
                 Freshness newFresh = go.GetComponent<Freshness>();
                 if (newFresh != null)
                 {

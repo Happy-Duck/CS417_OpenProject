@@ -55,10 +55,12 @@ MonoBehaviour:
   perHitResults: []
   finalResults:
   - prefab: {fileID: 703736864425442746, guid: 8bfaadf5ce58a8e4cbe1ee677ce6214d, type: 3}
+    spawnAt: {fileID: 3384746905750814500}
     localOffset: {x: 0, y: 0, z: 0}
     resourceName: 
     resourceAmount: 0
   - prefab: {fileID: 2145674658480338895, guid: 45d13db79175d6847a1383ec02190722, type: 3}
+    spawnAt: {fileID: 8739703932221197771}
     localOffset: {x: 0, y: 0, z: 0}
     resourceName: 
     resourceAmount: 0
@@ -101,7 +103,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
+  m_Size: {x: 0.1, y: 0.3, z: 0.3}
   m_Center: {x: -0.7, y: -6.66, z: -10.45}
 --- !u!1 &1719724102073531309
 GameObject:
@@ -463,6 +465,7 @@ MonoBehaviour:
   perHitResults: []
   finalResults:
   - prefab: {fileID: 1283188137764116020, guid: 74d84ccb383e81e409198ef8d61d448e, type: 3}
+    spawnAt: {fileID: 9045598303050703473}
     localOffset: {x: 0, y: 0, z: 0}
     resourceName: 
     resourceAmount: 0
@@ -504,8 +507,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
-  m_Center: {x: -0.55, y: -6.66, z: -10.8}
+  m_Size: {x: 0.3, y: 0.2, z: 0.1}
+  m_Center: {x: -0.55, y: -6.66, z: -10.75}
 --- !u!1 &3096200239220195617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,14 +1048,17 @@ MonoBehaviour:
   perHitResults: []
   finalResults:
   - prefab: {fileID: 4149859686391981556, guid: 09ece255c0a10ec4b9cc75e6ff2812fd, type: 3}
+    spawnAt: {fileID: 5940309746008461458}
     localOffset: {x: 0, y: 0, z: 0}
     resourceName: 
     resourceAmount: 0
   - prefab: {fileID: 5184896979433054411, guid: 53c9457bcf51bc042b563416e2a15d20, type: 3}
+    spawnAt: {fileID: 4650511530266010470}
     localOffset: {x: 0, y: 0, z: 0}
     resourceName: 
     resourceAmount: 0
   - prefab: {fileID: 8478937413719604366, guid: a1e318d754eb6b24b9ea5077dcf6a886, type: 3}
+    spawnAt: {fileID: 5510362229132269376}
     localOffset: {x: 0, y: 0, z: 0}
     resourceName: 
     resourceAmount: 0
@@ -1096,7 +1102,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
+  m_Size: {x: 0.1, y: 0.3, z: 0.3}
   m_Center: {x: -0.4, y: -6.66, z: -10.5}
 --- !u!1 &4900470366534328864
 GameObject:
@@ -1332,6 +1338,7 @@ MonoBehaviour:
   perHitResults: []
   finalResults:
   - prefab: {fileID: 7581318844355409337, guid: 12e7a7b476235084f843b38747defbb3, type: 3}
+    spawnAt: {fileID: 2649031110471208074}
     localOffset: {x: 0, y: 0, z: 0}
     resourceName: 
     resourceAmount: 0
@@ -1373,5 +1380,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.3, z: 0.3}
-  m_Center: {x: -0.55, y: -6.66, z: -10.2}
+  m_Size: {x: 0.3, y: 0.3, z: 0.1}
+  m_Center: {x: -0.55, y: -6.66, z: -10.23}
