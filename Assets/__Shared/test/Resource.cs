@@ -32,9 +32,6 @@ namespace Shared{
             Value = initialValue;
         }
 
-        public void ResetValue()
-        {
-            Value = initialValue;
-        }
+        public void ResetValue() => Value = initialValue;
     }
 }
