@@ -11,9 +11,9 @@ namespace Alyssa
             target = GetComponentInParent<Cuttable>();
         }
 
-        public void Hit(float knifeSpeed)
+        public void Hit(float knifeSpeed, KnifeType tool)
         {
-            if (target != null) target.TryHit(knifeSpeed, true);
+            if (target != null) target.TryHit(knifeSpeed, tool, true);
         }
     }
 }

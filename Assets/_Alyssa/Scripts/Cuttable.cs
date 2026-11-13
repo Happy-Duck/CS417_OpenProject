@@ -25,6 +25,7 @@ namespace Alyssa
         public bool requireZone;
         public GameObject[] blockers;
         public float unblockDelay = 1f;
+        public KnifeType requiredTool;
 
         [Header("Results")]
         public Result[] perHitResults;
@@ -39,6 +40,7 @@ namespace Alyssa
         public UnityEvent onNotOnBoard;
         public UnityEvent onWrongSpot;
         public UnityEvent onBlocked;
+        public UnityEvent onWrongTool;
 
         [HideInInspector] public int boardContacts;
 
@@ -46,13 +48,24 @@ namespace Alyssa
         float lastHitTime = -10f;
         float lastZoneTime = -10f;
         float lastBlockedTime = -10f;
+        float lastWrongToolTime = -10f;
         float unblockedTime = -10f;
         bool wasBlocked;
         bool wrongSpotPending;
 
-        public void TryHit(float knifeSpeed, bool viaZone = false)
+        public void TryHit(float knifeSpeed, KnifeType tool, bool viaZone = false)
         {
             if (viaZone) lastZoneTime = Time.time;
+
+            if (tool != requiredTool)
+            {
+                if (knifeSpeed >= minKnifeSpeed && Time.time - lastWrongToolTime > hitCooldown)
+                {
+                    lastWrongToolTime = Time.time;
+                    onWrongTool.Invoke();
+                }
+                return;
+            }
 
             if (requireZone && !viaZone)
             {

@@ -5,6 +5,7 @@ namespace Alyssa
     public class Knife : MonoBehaviour
     {
         public Transform bladePoint;
+        public KnifeType toolType;
         [SerializeField] float debugSpeed;
 
         public float Speed { get; private set; }
@@ -40,12 +41,12 @@ namespace Alyssa
             CutZone zone = other.GetComponent<CutZone>();
             if (zone != null)
             {
-                zone.Hit(Speed);
+                zone.Hit(Speed, toolType);
                 return;
             }
 
             Cuttable target = other.GetComponentInParent<Cuttable>();
-            if (target != null) target.TryHit(Speed, false);
+            if (target != null) target.TryHit(Speed, toolType, false);
         }
     }
 }

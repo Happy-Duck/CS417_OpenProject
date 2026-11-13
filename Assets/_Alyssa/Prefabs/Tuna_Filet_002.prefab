@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8267056631888673156}
   - component: {fileID: -1248561167510722553}
   - component: {fileID: 8343726667897087700}
+  - component: {fileID: 603610526609390310}
   m_Layer: 0
   m_Name: Tuna_Filet_002
   m_TagString: Untagged
@@ -271,3 +272,55 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.144282, y: 0.3977294, z: 1.753392}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &603610526609390310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4086494723864447334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08915210d8a09ba49af3159c392b4a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.Cuttable
+  hitsRequired: 2
+  minKnifeSpeed: 0.5
+  hitCooldown: 0.35
+  requiresBoard: 1
+  requireZone: 0
+  blockers: []
+  unblockDelay: 1
+  requiredTool: 1
+  perHitResults: []
+  finalResults:
+  - prefab: {fileID: 5666606117349286822, guid: 75320a18105b1204d8100dde26aa9bda, type: 3}
+    spawnAt: {fileID: 0}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resourceName: 
+    resourceAmount: 0
+  hideOnHit: []
+  popForce: 0.5
+  onHit:
+    m_PersistentCalls:
+      m_Calls: []
+  onFinalCut:
+    m_PersistentCalls:
+      m_Calls: []
+  onTooSlow:
+    m_PersistentCalls:
+      m_Calls: []
+  onNotOnBoard:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongSpot:
+    m_PersistentCalls:
+      m_Calls: []
+  onBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongTool:
+    m_PersistentCalls:
+      m_Calls: []
+  boardContacts: 0
