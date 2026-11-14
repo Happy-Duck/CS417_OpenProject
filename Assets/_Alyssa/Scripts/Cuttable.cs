@@ -53,6 +53,11 @@ namespace Alyssa
         bool wasBlocked;
         bool wrongSpotPending;
 
+        public bool Ready
+        {
+            get { return !IsBlocked() && Time.time - unblockedTime >= unblockDelay; }
+        }
+
         public void TryHit(float knifeSpeed, KnifeType tool, bool viaZone = false)
         {
             if (viaZone) lastZoneTime = Time.time;
