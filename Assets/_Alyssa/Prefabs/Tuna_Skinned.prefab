@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8343726667897087700}
   - component: {fileID: 603610526609390310}
   m_Layer: 0
-  m_Name: Tuna_Filet_002
+  m_Name: Tuna_Skinned
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
   perHitResults: []
   finalResults:
   - prefab: {fileID: 5666606117349286822, guid: 75320a18105b1204d8100dde26aa9bda, type: 3}
-    spawnAt: {fileID: 0}
+    spawnAt: {fileID: 4060782470646558923}
     localOffset: {x: 0, y: 0, z: 0}
     localEuler: {x: 0, y: 0, z: 0}
     resourceName: 
