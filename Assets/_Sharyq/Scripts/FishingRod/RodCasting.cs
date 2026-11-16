@@ -79,6 +79,7 @@ namespace _Sharyq
             _handToUse.action.started += StartCasting;
             _handToUse.action.canceled += FinishedCasting;
             _handToUse.action.Enable();
+            _velocityToUse.action.Enable();
         }
 
         private void DisableCastInteraction()
@@ -87,6 +88,7 @@ namespace _Sharyq
             _handToUse.action.started -= StartCasting;
             _handToUse.action.canceled -= FinishedCasting;
             _handToUse.action.Disable();
+            _velocityToUse.action.Disable();
         }
         
         private void StartCasting(InputAction.CallbackContext obj)
