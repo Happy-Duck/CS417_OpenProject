@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4114697317703682835}
   - component: {fileID: 379747512724630030}
   - component: {fileID: 4287574697493701000}
+  - component: {fileID: -7147698561853360752}
   m_Layer: 0
   m_Name: Tuna_Head_001
   m_TagString: Untagged
@@ -271,3 +272,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.160057, y: 0.7450301, z: 0.96436155}
   m_Center: {x: 0.0062118173, y: 0, z: 0.09785314}
+--- !u!114 &-7147698561853360752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7581318844355409337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000bdb966fe0e804c9a0cf74f7227876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.Scrap
+  baitValue: 1
+  consumed: 0

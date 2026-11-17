@@ -13,8 +13,8 @@ namespace Alyssa
             public Transform spawnAt;
             public Vector3 localOffset;
             public Vector3 localEuler;
-            public string resourceName;
-            public int resourceAmount = 1;
+            public Resource resource;
+            public float resourceAmount = 1f;
         }
 
         [Header("Cutting")]
@@ -44,6 +44,8 @@ namespace Alyssa
 
         [HideInInspector] public int boardContacts;
 
+        public static float LastHitSpeed;
+
         int hits;
         float lastHitTime = -10f;
         float lastZoneTime = -10f;
@@ -52,6 +54,11 @@ namespace Alyssa
         float unblockedTime = -10f;
         bool wasBlocked;
         bool wrongSpotPending;
+
+        public bool Ready
+        {
+            get { return !IsBlocked() && Time.time - unblockedTime >= unblockDelay; }
+        }
 
         public void TryHit(float knifeSpeed, KnifeType tool, bool viaZone = false)
         {
@@ -95,6 +102,7 @@ namespace Alyssa
             if (hideOnHit != null && hits < hideOnHit.Length && hideOnHit[hits] != null)
                 hideOnHit[hits].SetActive(false);
 
+            LastHitSpeed = knifeSpeed;
             hits++;
             onHit.Invoke();
 
@@ -164,8 +172,7 @@ namespace Alyssa
                     rb.AddForce((pos - transform.position).normalized * popForce, ForceMode.Impulse);
             }
 
-            if (!string.IsNullOrEmpty(r.resourceName) && ResourceManager.Instance != null)
-                ResourceManager.Instance.Add(r.resourceName, r.resourceAmount);
+            if (r.resource != null) r.resource.Add(r.resourceAmount);
         }
     }
 }
