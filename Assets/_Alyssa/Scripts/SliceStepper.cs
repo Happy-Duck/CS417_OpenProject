@@ -1,4 +1,5 @@
 using UnityEngine;
+using Shared;
 
 namespace Alyssa
 {
@@ -8,7 +9,7 @@ namespace Alyssa
     public class SliceStepper : MonoBehaviour
     {
         public GameObject slicePrefab;
-        public string resourceName;
+        public Resource resource;
         public int slices = 4;
         public float length = 0.6f;
         public SliceAxis axis = SliceAxis.Z;
@@ -61,8 +62,8 @@ namespace Alyssa
             r.prefab = slicePrefab;
             r.localOffset = offset;
             r.localEuler = sliceEuler;
-            r.resourceName = resourceName;
-            r.resourceAmount = 1;
+            r.resource = resource;
+            r.resourceAmount = 1f;
             return r;
         }
 
