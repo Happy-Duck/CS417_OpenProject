@@ -4,8 +4,8 @@ using UnityEngine;
 public class EOD_StatsController : MonoBehaviour
 {
     public EOD_StatDisplay[] StatDisplays;
-
-    public Dictionary<EOD_StatDisplay, float> DisplayToTargetNumberMapping;
+    public float[] DisplayTargetNumbers;
+    //public Dictionary<EOD_StatDisplay, float> DisplayToTargetNumberMapping;
 
     private int currentBox = 0;
 
@@ -16,7 +16,11 @@ public class EOD_StatsController : MonoBehaviour
 
     public void StartNextStatTicking()
     {
-        StatDisplays[currentBox].StartStatTicking();
+        if (currentBox >= StatDisplays.Length)
+        {
+            return;
+        }
+        StatDisplays[currentBox].StartStatTicking(DisplayTargetNumbers[currentBox]);
         currentBox++;
     }
 }

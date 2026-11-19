@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine.Jobs;
