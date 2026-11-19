@@ -2,10 +2,10 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 public class EOD_StatDisplay : MonoBehaviour
 {
-    public float TargetNumber;
     public UnityEvent FinishedTicking;
 
     [SerializeField]
@@ -21,6 +21,7 @@ public class EOD_StatDisplay : MonoBehaviour
     private float maxTickingDuration = 5f;
 
     private float currentAmount = 0;
+    private float TargetNumber = 0;
     //private float amountPerTick = 0;
 
     private void Start()
@@ -32,11 +33,12 @@ public class EOD_StatDisplay : MonoBehaviour
 
         //float amountPerTick = TargetNumber / (maxTickingDuration / secondTickDelay);
         //StartCoroutine(TickBoxText(secondTickDelay, amountPerTick));
-        StartStatTicking();
+        //StartStatTicking(10000);
     }
 
-    public void StartStatTicking()
+    public void StartStatTicking(float targetNumber)
     {
+        TargetNumber = targetNumber;
         float amountPerTick = TargetNumber / (maxTickingDuration / secondTickDelay);
         StartCoroutine(TickBoxText(secondTickDelay, amountPerTick));
     }
@@ -50,6 +52,7 @@ public class EOD_StatDisplay : MonoBehaviour
             yield return new WaitForSeconds(secondDelay);
         }
 
+        FinishedTicking.Invoke();
         yield return null;
     }
 }
