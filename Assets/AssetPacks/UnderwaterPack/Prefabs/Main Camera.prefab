@@ -162,8 +162,7 @@ MonoBehaviour:
   surfaceProfile: {fileID: 11400000, guid: 970512a260b20bb48b7eb9057548671a, type: 2}
   fogColor: {r: 0.34901962, g: 0.38039216, b: 0.5058824, a: 1}
   modifySkyboxTint: 1
-  refractionRendererFeature: {fileID: -4839966317808022980, guid: e016dc7c242750e46b7837507e641a07,
-    type: 2}
+  refractionRendererFeature: {fileID: 0}
   isUnderwater: 0
   waterVerts:
   - {x: -375, y: 0, z: -375}
