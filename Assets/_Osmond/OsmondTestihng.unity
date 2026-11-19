@@ -325,6 +325,10 @@ PrefabInstance:
       propertyPath: maxTickingDuration
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8401384171824055020, guid: a622faa975689b3458f773a666d796bf, type: 3}
+      propertyPath: maxTickingDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8833602699032399045, guid: a622faa975689b3458f773a666d796bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.90749
