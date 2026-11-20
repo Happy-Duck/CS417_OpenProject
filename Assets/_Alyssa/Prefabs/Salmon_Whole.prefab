@@ -27,11 +27,11 @@ Transform:
   m_GameObject: {fileID: 836232519766243297}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.05399996, y: 0, z: -1.269}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.05399996, y: 0, z: -0.477}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8860447382483964728}
+  m_Father: {fileID: 2352521198196803353}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3998895417918268158
 MeshFilter:
@@ -117,11 +117,11 @@ Transform:
   m_GameObject: {fileID: 1073116112331540255}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.068, y: 0.322, z: 0.26}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.034, y: 0.119, z: -0.015}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8860447382483964728}
+  m_Father: {fileID: 2882125954891053228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3603005402619990528
 MeshFilter:
@@ -207,11 +207,11 @@ Transform:
   m_GameObject: {fileID: 1716894131879765091}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.055000126, y: 0, z: 0.87599975}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.055000126, y: 0, z: 0.17}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8860447382483964728}
+  m_Father: {fileID: 8991838240035877508}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3114143639754387836
 MeshFilter:
@@ -281,9 +281,9 @@ GameObject:
   - component: {fileID: 8860447382483964728}
   - component: {fileID: 7357705321787979648}
   - component: {fileID: 5982357034693233122}
-  - component: {fileID: 2988716579602871514}
   - component: {fileID: 7283735937675741562}
-  - component: {fileID: 1655113130713114567}
+  - component: {fileID: 5022934720799576636}
+  - component: {fileID: 7130921378092101663}
   m_Layer: 0
   m_Name: Salmon_Whole
   m_TagString: Untagged
@@ -304,14 +304,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 409732766447787429}
-  - {fileID: 6863083509954691814}
-  - {fileID: 5767435384110400869}
-  - {fileID: 5630769565379546834}
-  - {fileID: 4611018012514031455}
-  - {fileID: 8372839765406952327}
-  - {fileID: 2060522935484235481}
-  - {fileID: 58887262732791131}
+  - {fileID: 8291350024645574964}
+  - {fileID: 3120871924701202359}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7357705321787979648
@@ -471,27 +465,6 @@ MonoBehaviour:
   m_LimitAngularVelocity: 0
   m_MaxLinearVelocityDelta: 10
   m_MaxAngularVelocityDelta: 20
---- !u!65 &2988716579602871514
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3046879192643109350}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.8, z: 3}
-  m_Center: {x: 0, y: 0, z: -0.2}
 --- !u!114 &7283735937675741562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,16 +482,44 @@ MonoBehaviour:
   hitCooldown: 0.35
   requiresBoard: 1
   requireZone: 0
-  blockers: []
+  blockers:
+  - {fileID: 4836201858742816076}
+  - {fileID: 4302384435614088939}
+  - {fileID: 8253611389068799210}
+  - {fileID: 6214187292893853744}
   unblockDelay: 1
   requiredTool: 0
   perHitResults: []
-  finalResults: []
+  finalResults:
+  - prefab: {fileID: 2386830420685216375, guid: eaeb54498e0cad848b2fe9f774a8ac3b, type: 3}
+    spawnAt: {fileID: 0}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
+    resourceAmount: 0
+  - prefab: {fileID: 2386830420685216375, guid: eaeb54498e0cad848b2fe9f774a8ac3b, type: 3}
+    spawnAt: {fileID: 0}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
+    resourceAmount: 0
   hideOnHit: []
   popForce: 0.5
   onHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5022934720799576636}
+        m_TargetAssemblyTypeName: Alyssa.SoundPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onFinalCut:
     m_PersistentCalls:
       m_Calls: []
@@ -538,7 +539,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   boardContacts: 0
---- !u!114 &1655113130713114567
+--- !u!114 &5022934720799576636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -559,6 +560,27 @@ MonoBehaviour:
   scaleWithSpeed: 0
   speedRange: {x: 1, y: 5}
   volumeRange: {x: 0.5, y: 1}
+--- !u!65 &7130921378092101663
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046879192643109350}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.2, z: 0.8}
+  m_Center: {x: 0, y: 0, z: -0.1}
 --- !u!1 &3798347440330100197
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,11 +608,11 @@ Transform:
   m_GameObject: {fileID: 3798347440330100197}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.42299974, y: 0, z: -0.60700005}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.103, y: 0, z: -0.277}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8860447382483964728}
+  m_Father: {fileID: 564575413702026845}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &599677930428995834
 MeshFilter:
@@ -649,6 +671,302 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4302384435614088939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2352521198196803353}
+  - component: {fileID: 9204512635731620384}
+  - component: {fileID: 7512049809639424488}
+  - component: {fileID: 3491366102242439990}
+  m_Layer: 0
+  m_Name: Tail Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2352521198196803353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4302384435614088939}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 58887262732791131}
+  m_Father: {fileID: 3120871924701202359}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9204512635731620384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4302384435614088939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08915210d8a09ba49af3159c392b4a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.Cuttable
+  hitsRequired: 1
+  minKnifeSpeed: 1
+  hitCooldown: 0.35
+  requiresBoard: 1
+  requireZone: 0
+  blockers: []
+  unblockDelay: 1
+  requiredTool: 0
+  perHitResults: []
+  finalResults:
+  - prefab: {fileID: 6573284872719294206, guid: 57aea7708de7d644e9cf7260c71c59bd, type: 3}
+    spawnAt: {fileID: 58887262732791131}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
+    resourceAmount: 0
+  hideOnHit: []
+  popForce: 0.5
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3491366102242439990}
+        m_TargetAssemblyTypeName: Alyssa.SoundPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFinalCut:
+    m_PersistentCalls:
+      m_Calls: []
+  onTooSlow:
+    m_PersistentCalls:
+      m_Calls: []
+  onNotOnBoard:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongSpot:
+    m_PersistentCalls:
+      m_Calls: []
+  onBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongTool:
+    m_PersistentCalls:
+      m_Calls: []
+  boardContacts: 0
+--- !u!65 &7512049809639424488
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4302384435614088939}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.3, z: 0.1}
+  m_Center: {x: 0.05, y: 0, z: -0.4}
+--- !u!114 &3491366102242439990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4302384435614088939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7ec87ccd6debf45a0d3f140d28af17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.SoundPlayer
+  clips:
+  - {fileID: 8300000, guid: 6cdc4bd5c266d1b4fa5a1bf34fc74d65, type: 3}
+  - {fileID: 8300000, guid: ec182ff8dbefff941804cc72bacc6fd1, type: 3}
+  - {fileID: 8300000, guid: f6c73f45a29a9914f940206617fba468, type: 3}
+  volume: 1
+  pitchRange: {x: 0.95, y: 1.05}
+  scaleWithSpeed: 0
+  speedRange: {x: 1, y: 5}
+  volumeRange: {x: 0.5, y: 1}
+--- !u!1 &4836201858742816076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2882125954891053228}
+  - component: {fileID: 8226573576352192921}
+  - component: {fileID: 60503348078241363}
+  - component: {fileID: 2482818354867794990}
+  m_Layer: 0
+  m_Name: Side Fin Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2882125954891053228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836201858742816076}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 409732766447787429}
+  - {fileID: 6863083509954691814}
+  - {fileID: 8372839765406952327}
+  m_Father: {fileID: 3120871924701202359}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8226573576352192921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836201858742816076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08915210d8a09ba49af3159c392b4a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.Cuttable
+  hitsRequired: 1
+  minKnifeSpeed: 1
+  hitCooldown: 0.35
+  requiresBoard: 1
+  requireZone: 0
+  blockers: []
+  unblockDelay: 1
+  requiredTool: 0
+  perHitResults: []
+  finalResults:
+  - prefab: {fileID: 9133241495140630935, guid: c4039a90489130147897d4195653802a, type: 3}
+    spawnAt: {fileID: 409732766447787429}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
+    resourceAmount: 0
+  - prefab: {fileID: 9133241495140630935, guid: c4039a90489130147897d4195653802a, type: 3}
+    spawnAt: {fileID: 6863083509954691814}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
+    resourceAmount: 0
+  - prefab: {fileID: 8719067848192314197, guid: 2d8186659d3f589469bed5993b571b88, type: 3}
+    spawnAt: {fileID: 8372839765406952327}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
+    resourceAmount: 0
+  hideOnHit: []
+  popForce: 0.5
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2482818354867794990}
+        m_TargetAssemblyTypeName: Alyssa.SoundPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFinalCut:
+    m_PersistentCalls:
+      m_Calls: []
+  onTooSlow:
+    m_PersistentCalls:
+      m_Calls: []
+  onNotOnBoard:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongSpot:
+    m_PersistentCalls:
+      m_Calls: []
+  onBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongTool:
+    m_PersistentCalls:
+      m_Calls: []
+  boardContacts: 0
+--- !u!65 &60503348078241363
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836201858742816076}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 0.3, z: 0.3}
+  m_Center: {x: 0.2, y: 0, z: -0.2}
+--- !u!114 &2482818354867794990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836201858742816076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7ec87ccd6debf45a0d3f140d28af17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.SoundPlayer
+  clips:
+  - {fileID: 8300000, guid: 6cdc4bd5c266d1b4fa5a1bf34fc74d65, type: 3}
+  - {fileID: 8300000, guid: ec182ff8dbefff941804cc72bacc6fd1, type: 3}
+  - {fileID: 8300000, guid: f6c73f45a29a9914f940206617fba468, type: 3}
+  volume: 1
+  pitchRange: {x: 0.95, y: 1.05}
+  scaleWithSpeed: 0
+  speedRange: {x: 1, y: 5}
+  volumeRange: {x: 0.5, y: 1}
 --- !u!1 &5003309772417995880
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,11 +994,11 @@ Transform:
   m_GameObject: {fileID: 5003309772417995880}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.06300002, y: 0, z: -0.14099997}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.055, y: 0, z: -0.14099997}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8860447382483964728}
+  m_Father: {fileID: 3120871924701202359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8758191221803336055
 MeshFilter:
@@ -739,6 +1057,73 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6078390500110617282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8291350024645574964}
+  - component: {fileID: 4215720044797240827}
+  - component: {fileID: 1083125609224206047}
+  m_Layer: 0
+  m_Name: Spine Zone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8291350024645574964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6078390500110617282}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.039, y: 0.024, z: -0.046}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8860447382483964728}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4215720044797240827
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6078390500110617282}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.03, z: 0.6}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1083125609224206047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6078390500110617282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8b8019dd2a35448b32fe5eafde43b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.CutZone
+  target: {fileID: 7283735937675741562}
 --- !u!1 &6085843844669151324
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,11 +1151,11 @@ Transform:
   m_GameObject: {fileID: 6085843844669151324}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.06800002, y: -0.4, z: 0.26000005}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.0662, y: -0.1191, z: -0.004}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8860447382483964728}
+  m_Father: {fileID: 2882125954891053228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7534884475683982659
 MeshFilter:
@@ -829,6 +1214,147 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6214187292893853744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8991838240035877508}
+  - component: {fileID: 103773854877397935}
+  - component: {fileID: 3550596657177000448}
+  - component: {fileID: 5848874404651689255}
+  m_Layer: 0
+  m_Name: Head Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8991838240035877508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214187292893853744}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2060522935484235481}
+  m_Father: {fileID: 3120871924701202359}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &103773854877397935
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214187292893853744}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.3, z: 0.1}
+  m_Center: {x: 0.06, y: 0, z: 0.1}
+--- !u!114 &3550596657177000448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214187292893853744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08915210d8a09ba49af3159c392b4a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.Cuttable
+  hitsRequired: 1
+  minKnifeSpeed: 1
+  hitCooldown: 0.35
+  requiresBoard: 1
+  requireZone: 0
+  blockers: []
+  unblockDelay: 1
+  requiredTool: 0
+  perHitResults: []
+  finalResults:
+  - prefab: {fileID: 8049949205043555014, guid: 1285ec18447e8e546a197a5fa899524b, type: 3}
+    spawnAt: {fileID: 2060522935484235481}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
+    resourceAmount: 0
+  hideOnHit: []
+  popForce: 0.5
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5848874404651689255}
+        m_TargetAssemblyTypeName: Alyssa.SoundPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFinalCut:
+    m_PersistentCalls:
+      m_Calls: []
+  onTooSlow:
+    m_PersistentCalls:
+      m_Calls: []
+  onNotOnBoard:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongSpot:
+    m_PersistentCalls:
+      m_Calls: []
+  onBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongTool:
+    m_PersistentCalls:
+      m_Calls: []
+  boardContacts: 0
+--- !u!114 &5848874404651689255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6214187292893853744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7ec87ccd6debf45a0d3f140d28af17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.SoundPlayer
+  clips:
+  - {fileID: 8300000, guid: 6cdc4bd5c266d1b4fa5a1bf34fc74d65, type: 3}
+  - {fileID: 8300000, guid: ec182ff8dbefff941804cc72bacc6fd1, type: 3}
+  - {fileID: 8300000, guid: f6c73f45a29a9914f940206617fba468, type: 3}
+  volume: 1
+  pitchRange: {x: 0.95, y: 1.05}
+  scaleWithSpeed: 0
+  speedRange: {x: 1, y: 5}
+  volumeRange: {x: 0.5, y: 1}
 --- !u!1 &6575777999606194143
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,11 +1382,11 @@ Transform:
   m_GameObject: {fileID: 6575777999606194143}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.57000005, y: 0, z: -0.06600016}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.133, y: 0, z: -0.06600016}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8860447382483964728}
+  m_Father: {fileID: 564575413702026845}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7468604779214949056
 MeshFilter:
@@ -919,6 +1445,190 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6934715690491113027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3120871924701202359}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3120871924701202359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934715690491113027}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5630769565379546834}
+  - {fileID: 2882125954891053228}
+  - {fileID: 2352521198196803353}
+  - {fileID: 564575413702026845}
+  - {fileID: 8991838240035877508}
+  m_Father: {fileID: 8860447382483964728}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8253611389068799210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 564575413702026845}
+  - component: {fileID: 6375316358388242359}
+  - component: {fileID: 5806564550730994582}
+  - component: {fileID: 3240802556722523319}
+  m_Layer: 0
+  m_Name: Back Fin Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &564575413702026845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8253611389068799210}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5767435384110400869}
+  - {fileID: 4611018012514031455}
+  m_Father: {fileID: 3120871924701202359}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6375316358388242359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8253611389068799210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08915210d8a09ba49af3159c392b4a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.Cuttable
+  hitsRequired: 1
+  minKnifeSpeed: 1
+  hitCooldown: 0.35
+  requiresBoard: 1
+  requireZone: 0
+  blockers: []
+  unblockDelay: 1
+  requiredTool: 0
+  perHitResults: []
+  finalResults:
+  - prefab: {fileID: 5153533581361837456, guid: 2fae15b15d3b8dc45995b99cec2aad5e, type: 3}
+    spawnAt: {fileID: 5767435384110400869}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
+    resourceAmount: 0
+  - prefab: {fileID: 8128940736019824552, guid: f3b4331ef6b6c244cb8e51b95d6eeda1, type: 3}
+    spawnAt: {fileID: 4611018012514031455}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
+    resourceAmount: 0
+  hideOnHit: []
+  popForce: 0.5
+  onHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3240802556722523319}
+        m_TargetAssemblyTypeName: Alyssa.SoundPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFinalCut:
+    m_PersistentCalls:
+      m_Calls: []
+  onTooSlow:
+    m_PersistentCalls:
+      m_Calls: []
+  onNotOnBoard:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongSpot:
+    m_PersistentCalls:
+      m_Calls: []
+  onBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongTool:
+    m_PersistentCalls:
+      m_Calls: []
+  boardContacts: 0
+--- !u!65 &5806564550730994582
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8253611389068799210}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 0.3, z: 0.3}
+  m_Center: {x: -0.1, y: 0, z: -0.15}
+--- !u!114 &3240802556722523319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8253611389068799210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7ec87ccd6debf45a0d3f140d28af17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.SoundPlayer
+  clips:
+  - {fileID: 8300000, guid: 6cdc4bd5c266d1b4fa5a1bf34fc74d65, type: 3}
+  - {fileID: 8300000, guid: ec182ff8dbefff941804cc72bacc6fd1, type: 3}
+  - {fileID: 8300000, guid: f6c73f45a29a9914f940206617fba468, type: 3}
+  volume: 1
+  pitchRange: {x: 0.95, y: 1.05}
+  scaleWithSpeed: 0
+  speedRange: {x: 1, y: 5}
+  volumeRange: {x: 0.5, y: 1}
 --- !u!1 &9185546411560202557
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,13 +1655,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9185546411560202557}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.58900005, y: 0, z: -0.28599995}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0.103305586, z: -0, w: 0.9946497}
+  m_LocalPosition: {x: 0.188, y: 0, z: -0.282}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8860447382483964728}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 2882125954891053228}
+  m_LocalEulerAnglesHint: {x: 0, y: 11.859, z: 0}
 --- !u!33 &4872216340365550626
 MeshFilter:
   m_ObjectHideFlags: 0
