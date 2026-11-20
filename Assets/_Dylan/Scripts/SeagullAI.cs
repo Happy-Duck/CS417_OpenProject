@@ -126,9 +126,9 @@ namespace Dylan {
                 Destroy(gameObject);
         }
 
-        void DropResourse()
+        void DropResource()
         {
-            if (resource != null && resource.Prefab != null) 
+            if (resource != null && resource.Prefab != null)
                 Instantiate(resource.Prefab, transform.position, transform.rotation);
         }
 
@@ -139,13 +139,16 @@ namespace Dylan {
                     ChangeState(SeagullState.Escaping);
                     break;
                 case SeagullState.Chasing: 
-                    if (other.CompareTag("Dish")) hasResource = true;
+                    if (other.CompareTag("Dish")) {
+                        Destroy(target.gameObject);
+                        hasResource = true;
+                    }
                     ChangeState(SeagullState.Escaping);
                     break;
                 case SeagullState.Escaping:
                     hp -= 1;
-                    if (hp > 0) break;
-                    if (hasResource) DropResourse();
+                    if (Hp > 0) break;
+                    if (hasResource) DropResource();
                     Destroy(gameObject);
                     break;
             }

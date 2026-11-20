@@ -327,9 +327,7 @@ MonoBehaviour:
   onItemPlated:
     m_PersistentCalls:
       m_Calls: []
-  onComplete:
-    m_PersistentCalls:
-      m_Calls: []
+  cookingEvents: {fileID: 11400000, guid: 5584e3efe6dc423fbed162226b1367cf, type: 2}
 --- !u!1 &1667804937728651337
 GameObject:
   m_ObjectHideFlags: 0

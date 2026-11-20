@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Shared.Resource
   initialValue: 0
   minValue: 0
-  prefab: {fileID: 7154650547096056648, guid: 9f351ed6ea764ca88c74562160240c0b, type: 3}
+  prefab: {fileID: 1801110000, guid: 429567980c344aa4aadb2a9f4af70038, type: 3}
