@@ -16,9 +16,9 @@ namespace Dylan
         [SerializeField] private GameObject testDishPrefab;
         [SerializeField] private Transform testDishSpawnPoint;
 
-        private void OnEnable() => cookingEvents.DishCompleted.AddListener(TrySpawn);
+        private void OnEnable() => cookingEvents.OnCompleted.AddListener(TrySpawn);
 
-        private void OnDisable() => cookingEvents.DishCompleted.RemoveListener(TrySpawn);
+        private void OnDisable() => cookingEvents.OnCompleted.RemoveListener(TrySpawn);
 
         public void SimulateDishComplete()
         {

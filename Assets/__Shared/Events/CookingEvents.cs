@@ -8,6 +8,6 @@ namespace Shared
     {
         [SerializeField] private UnityEvent dishCompleted = new();
 
-        public UnityEvent DishCompleted => dishCompleted;
+        public UnityEvent OnCompleted => dishCompleted;
     }
 }
