@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Shared;
 
 namespace Alyssa
 {
@@ -11,7 +12,8 @@ namespace Alyssa
         public string dishName = "Tuna Sashimi Plate";
 
         public UnityEvent onItemPlated;
-        public UnityEvent onComplete;
+        //  cookinEvents.OnComplte = your original onComplete function, you can make it public if needed
+        [SerializeField] private CookingEvents cookingEvents;  
 
         PlateItem[] placed;
         bool complete;
@@ -56,8 +58,10 @@ namespace Alyssa
                 if (p != null) filled++;
 
             bool nowComplete = slots.Length > 0 && filled == slots.Length;
-            if (nowComplete && !complete) onComplete.Invoke();
-            complete = nowComplete;
+            complete = nowComplete;  // I think the event should fire after state change, feel free to roll back the change. >.<
+            // same usage as before, using Invoke() to fire
+            if (nowComplete && !complete) cookingEvents.OnCompleted.Invoke();
+            // complete = nowComplete;
         }
 
         int NearestFreeSlot(Vector3 position)

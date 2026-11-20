@@ -24,7 +24,7 @@ namespace Dylan
         {
             Instantiate(
                 testDishPrefab, testDishSpawnPoint.position, testDishSpawnPoint.rotation, transform.parent);
-            cookingEvents.DishCompleted.Invoke();
+            cookingEvents.OnCompleted.Invoke();
         }
 
         public void TrySpawn()
