@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "Helm Input Actions",
+    "maps": [
+        {
+            "name": "Helm",
+            "id": "d500d40c-e599-4a12-a6c3-d09a64ec8324",
+            "actions": [
+                {
+                    "name": "EnterHelm",
+                    "type": "Button",
+                    "id": "3025f020-8780-40dc-b501-ca86d1eaa498",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=0)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ExitHelm",
+                    "type": "Button",
+                    "id": "40d4ba98-8be0-42c2-80fd-08c085aaa906",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=0)",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ec167119-b700-4e31-a9ed-c3fc4cf0783d",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnterHelm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95129066-e5b0-471d-b825-c391a68fa9cc",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitHelm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
