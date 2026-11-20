@@ -58,10 +58,9 @@ namespace Alyssa
                 if (p != null) filled++;
 
             bool nowComplete = slots.Length > 0 && filled == slots.Length;
-            complete = nowComplete;  // I think the event should fire after state change, feel free to roll back the change. >.<
             // same usage as before, using Invoke() to fire
             if (nowComplete && !complete) cookingEvents.OnCompleted.Invoke();
-            // complete = nowComplete;
+            complete = nowComplete;
         }
 
         int NearestFreeSlot(Vector3 position)
