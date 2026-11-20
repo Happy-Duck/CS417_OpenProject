@@ -26,6 +26,7 @@ namespace Dylan {
         public float circleSpeed = 60f; // Degrees per second
         private Vector3 circleCenter;
         private int circleDirection;
+        private float circleTimeRemaining;
 
         [Header("Escaping")]
         public float escapeDistance = 20f;
@@ -50,6 +51,8 @@ namespace Dylan {
             {
                 case SeagullState.Circling:
                     Circle();
+                    circleTimeRemaining -= Time.deltaTime;
+                    if (circleTimeRemaining <= 0f) Destroy(gameObject);
                     break;
                 case SeagullState.Chasing:
                     ChaseTarget();
@@ -102,7 +105,11 @@ namespace Dylan {
             transform.position += FlightForward * CurrentSpeed * Time.deltaTime;
         }
 
-        void StartCircling() => circleCenter = transform.position - transform.right * circleRadius * circleDirection;
+        void StartCircling()
+        {
+            circleCenter = transform.position - transform.right * circleRadius * circleDirection;
+            circleTimeRemaining = 30f;
+        }
 
         void Circle() => transform.RotateAround(
             circleCenter,
