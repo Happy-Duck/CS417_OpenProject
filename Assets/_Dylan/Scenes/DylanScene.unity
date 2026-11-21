@@ -127,6 +127,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 242851315}
     m_Modifications:
+    - target: {fileID: 6520291404937146767, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_ActionAssets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520291404937146767, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_ActionAssets.Array.data[1]
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: ef7f0f50ae4945dcb21c2c7a277b2cca, type: 3}
     - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_Name
       value: XR Origin (XR Rig)
@@ -528,7 +536,7 @@ GameObject:
   - component: {fileID: 915536191}
   - component: {fileID: 915536194}
   - component: {fileID: 915536193}
-  - component: {fileID: 915536192}
+  - component: {fileID: 915536195}
   m_Layer: 0
   m_Name: BoatPreview
   m_TagString: Untagged
@@ -552,20 +560,6 @@ Transform:
   - {fileID: 2041794311}
   m_Father: {fileID: 242851315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &915536192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915536190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a542d1a4a894824ea23328c1c3015d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Dylan.BoatHeadingPreview
-  helm: {fileID: 1640146486}
-  fullRudderDegreesPerSecond: 30
 --- !u!23 &915536193
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -623,6 +617,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915536190}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &915536195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915536190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2434fe85c24b5464e93681a2b46b63a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dylan.ShipControl
+  helm: {fileID: 1640146486}
+  turnRate: 30
 --- !u!1 &970929332
 GameObject:
   m_ObjectHideFlags: 0
