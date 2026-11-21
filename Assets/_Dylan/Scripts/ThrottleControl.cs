@@ -1,7 +1,6 @@
 using System;
 using Shared;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Dylan
 {
@@ -13,21 +12,13 @@ namespace Dylan
         private const float DirectionThreshold = 0.5f;
 
         [SerializeField] private Stat shipSpeed;
-        [SerializeField] private ShipSpeedMeter meterPrefab;
 
         public float SpeedPercent => shipSpeed.Value;
 
-        private ShipSpeedMeter meter;
         private int previousDirection;
         private float nextStepTime;
 
-        internal void Initialize(Transform parent) => meter = UnityEngine.Object.Instantiate(meterPrefab, parent, true);
-
-        internal void Begin(Transform view)
-        {
-            previousDirection = 0;
-            meter.Show(shipSpeed, view);
-        }
+        internal void Begin() => previousDirection = 0;
 
         internal void UpdateThrottle(float axis)
         {
@@ -51,7 +42,5 @@ namespace Dylan
             shipSpeed.Add(direction * Step);
             nextStepTime += RepeatInterval;
         }
-
-        internal void End() => meter.Hide();
     }
 }

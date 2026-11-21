@@ -6,41 +6,18 @@ namespace Dylan
 {
     public sealed class ShipSpeedMeter : MonoBehaviour
     {
+        [SerializeField] private Stat shipSpeed;
         [SerializeField] private TextMeshProUGUI readout;
         [SerializeField] private RectTransform track;
         [SerializeField] private RectTransform indicator;
-        [SerializeField] private Vector3 viewOffset = new(0.47f, -0.255f, 0.88f);
-
-        private Stat shipSpeed;
-        private Transform view;
-
-        internal void Show(Stat speed, Transform cameraTransform)
-        {
-            shipSpeed = speed;
-            view = cameraTransform;
-            FollowView();
-            gameObject.SetActive(true);
-        }
-
-        internal void Hide() => gameObject.SetActive(false);
 
         void OnEnable()
         {
             shipSpeed.OnStatChanged += Refresh;
-            Application.onBeforeRender += FollowView;
             Refresh(shipSpeed.Value);
         }
 
-        void OnDisable()
-        {
-            shipSpeed.OnStatChanged -= Refresh;
-            Application.onBeforeRender -= FollowView;
-        }
-
-        void LateUpdate() => FollowView();
-
-        [BeforeRenderOrder(10000)]
-        private void FollowView() => transform.SetPositionAndRotation(view.TransformPoint(viewOffset), view.rotation);
+        void OnDisable() => shipSpeed.OnStatChanged -= Refresh;
 
         private void Refresh(float speed)
         {

@@ -18,6 +18,7 @@ namespace Dylan
 
         [SerializeField] private HelmControl helm = new();
         [SerializeField] private ThrottleControl throttle = new();
+        [SerializeField] private GameObject steeringHUD;
 
         [Header("Player")]
         [SerializeField] private XROrigin xrOrigin;
@@ -42,7 +43,6 @@ namespace Dylan
         void Awake()
         {
             helm.Initialize();
-            throttle.Initialize(transform);
             handInteractors =
                 leftController.GetComponentsInChildren<XRBaseInteractor>(true)
                 .Concat(rightController.GetComponentsInChildren<XRBaseInteractor>(true)).ToArray();
@@ -113,8 +113,9 @@ namespace Dylan
                 Vector3.up * steeringHeightOffset;
 
             helm.Begin(leftVisual, rightVisual);
-            throttle.Begin(head);
+            throttle.Begin();
             IsSteering = true;
+            steeringHUD.SetActive(true);
         }
 
         private void ExitHelm()
@@ -122,7 +123,7 @@ namespace Dylan
             if (!IsSteering) return;
 
             IsSteering = false;
-            throttle.End();
+            steeringHUD.SetActive(false);
             helm.End();
             if (xrOrigin != null && xrOrigin.Origin != null)
                 xrOrigin.Origin.transform.position -= Vector3.up * steeringHeightOffset;
