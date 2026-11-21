@@ -316,5 +316,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385de859f86ca7247a8fc5b1f6ab632e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Alyssa.PlateItem
-  itemName: Tuna Sashimi
+  dish: {fileID: 11400000, guid: 8d3225f94b24f5742b42ded34f5f7ea9, type: 2}
   plated: 0

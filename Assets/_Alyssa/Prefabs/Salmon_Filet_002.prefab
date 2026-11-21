@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7474541880835341646}
   - component: {fileID: 7792651685066416450}
   - component: {fileID: -9168135198120742874}
+  - component: {fileID: 8852368218251821021}
+  - component: {fileID: 1567216396789183480}
   m_Layer: 0
   m_Name: Salmon_Filet_002
   m_TagString: Untagged
@@ -271,3 +273,88 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0694222, y: 0.37170967, z: 1.6386839}
   m_Center: {x: 0, y: -0.00000000745058, z: 0}
+--- !u!114 &8852368218251821021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386830420685216375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08915210d8a09ba49af3159c392b4a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.Cuttable
+  hitsRequired: 1
+  minKnifeSpeed: 1
+  hitCooldown: 0.35
+  requiresBoard: 1
+  requireZone: 0
+  blockers: []
+  unblockDelay: 1
+  requiredTool: 1
+  perHitResults: []
+  finalResults:
+  - prefab: {fileID: 6934384042104460450, guid: bfccfbf65d2e8714589b1bb99de452c4, type: 3}
+    spawnAt: {fileID: 0}
+    localOffset: {x: 0, y: 0, z: 0}
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
+    resourceAmount: 0
+  hideOnHit: []
+  popForce: 0.5
+  onHit:
+    m_PersistentCalls:
+      m_Calls: []
+  onFinalCut:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1567216396789183480}
+        m_TargetAssemblyTypeName: Alyssa.SoundPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTooSlow:
+    m_PersistentCalls:
+      m_Calls: []
+  onNotOnBoard:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongSpot:
+    m_PersistentCalls:
+      m_Calls: []
+  onBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongTool:
+    m_PersistentCalls:
+      m_Calls: []
+  boardContacts: 0
+--- !u!114 &1567216396789183480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386830420685216375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7ec87ccd6debf45a0d3f140d28af17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.SoundPlayer
+  clips:
+  - {fileID: 8300000, guid: 6cdc4bd5c266d1b4fa5a1bf34fc74d65, type: 3}
+  - {fileID: 8300000, guid: ec182ff8dbefff941804cc72bacc6fd1, type: 3}
+  - {fileID: 8300000, guid: f6c73f45a29a9914f940206617fba468, type: 3}
+  volume: 1
+  pitchRange: {x: 0.95, y: 1.05}
+  scaleWithSpeed: 0
+  speedRange: {x: 1, y: 5}
+  volumeRange: {x: 0.5, y: 1}
