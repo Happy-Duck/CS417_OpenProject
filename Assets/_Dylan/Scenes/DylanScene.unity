@@ -631,6 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dylan.ShipControl
   helm: {fileID: 1640146486}
   turnRate: 30
+  fullSpeed: 2
 --- !u!1 &970929332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,6 +1420,10 @@ MonoBehaviour:
     leftGrip: {fileID: 264859842}
     rightGrip: {fileID: 1584982626}
     maximumWheelAngle: 60
+  throttle:
+    shipSpeed: {fileID: 11400000, guid: 99108ae7af627654e93f2dfaf573d04b, type: 2}
+    throttleInput: {fileID: 5207570781707039948, guid: f50ac898a09327d4da8130fed3d51c2b, type: 3}
+    meterPrefab: {fileID: 7109891283715757668, guid: ae887f29117fb6944a7e1299ccfbaf55, type: 3}
   xrOrigin: {fileID: 171411387}
   station: {fileID: 2053494319}
   steeringHeightOffset: 0.7

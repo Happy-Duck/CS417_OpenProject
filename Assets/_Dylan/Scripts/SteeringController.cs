@@ -14,8 +14,10 @@ namespace Dylan
         [Header("Input")]
         [SerializeField] private InputActionReference enterHelm;
         [SerializeField] private InputActionReference exitHelm;
+        [SerializeField] private InputActionReference throttleInput;
 
         [SerializeField] private HelmControl helm = new();
+        [SerializeField] private ThrottleControl throttle = new();
 
         [Header("Player")]
         [SerializeField] private XROrigin xrOrigin;
@@ -29,6 +31,7 @@ namespace Dylan
         public bool IsSteering { get; private set; }
         public float WheelAngle => helm.WheelAngle;
         public float SteeringInput => helm.SteeringInput;
+        public float SpeedPercent => throttle.SpeedPercent;
 
         private XRBaseInteractor[] handInteractors;
         private GameObject[] interactorObjects;
@@ -39,6 +42,7 @@ namespace Dylan
         void Awake()
         {
             helm.Initialize();
+            throttle.Initialize(transform);
             handInteractors =
                 leftController.GetComponentsInChildren<XRBaseInteractor>(true)
                 .Concat(rightController.GetComponentsInChildren<XRBaseInteractor>(true)).ToArray();
@@ -57,12 +61,14 @@ namespace Dylan
         {
             enterHelm.action.Enable();
             exitHelm.action.Enable();
+            throttleInput.action.Enable();
         }
 
         void OnDisable()
         {
             enterHelm.action.Disable();
             exitHelm.action.Disable();
+            throttleInput.action.Disable();
             ExitHelm();
         }
 
@@ -70,6 +76,8 @@ namespace Dylan
         {
             if (!IsSteering && enterHelm.action.triggered) TryEnterHelm();
             else if (IsSteering && exitHelm.action.triggered) ExitHelm();
+
+            if (IsSteering) throttle.UpdateThrottle(throttleInput.action.ReadValue<Vector2>().y);
         }
 
         void LateUpdate()
@@ -105,6 +113,7 @@ namespace Dylan
                 Vector3.up * steeringHeightOffset;
 
             helm.Begin(leftVisual, rightVisual);
+            throttle.Begin(head);
             IsSteering = true;
         }
 
@@ -113,6 +122,7 @@ namespace Dylan
             if (!IsSteering) return;
 
             IsSteering = false;
+            throttle.End();
             helm.End();
             if (xrOrigin != null && xrOrigin.Origin != null)
                 xrOrigin.Origin.transform.position -= Vector3.up * steeringHeightOffset;
