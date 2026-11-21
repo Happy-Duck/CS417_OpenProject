@@ -1411,13 +1411,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 168f9285c1417954aa8ee20d52294cf8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Dylan.HelmController
+  m_EditorClassIdentifier: Assembly-CSharp::Dylan.SteeringController
   enterHelm: {fileID: 4438056038750593665, guid: f50ac898a09327d4da8130fed3d51c2b, type: 3}
   exitHelm: {fileID: -3606930261974748116, guid: f50ac898a09327d4da8130fed3d51c2b, type: 3}
-  wheelPivot: {fileID: 625575205}
-  leftGrip: {fileID: 264859842}
-  rightGrip: {fileID: 1584982626}
-  maximumWheelAngle: 60
+  helm:
+    wheelPivot: {fileID: 625575205}
+    leftGrip: {fileID: 264859842}
+    rightGrip: {fileID: 1584982626}
+    maximumWheelAngle: 60
   xrOrigin: {fileID: 171411387}
   station: {fileID: 2053494319}
   steeringHeightOffset: 0.7

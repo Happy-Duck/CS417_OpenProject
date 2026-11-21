@@ -5,7 +5,7 @@ namespace Dylan
     [DefaultExecutionOrder(10)]
     public class ShipControl : MonoBehaviour
     {        
-        [SerializeField] private HelmController helm;
+        [SerializeField] private SteeringController helm;
         [SerializeField, Min(0f)] private float turnRate = 30f; // turning speed
         void LateUpdate()
         {
