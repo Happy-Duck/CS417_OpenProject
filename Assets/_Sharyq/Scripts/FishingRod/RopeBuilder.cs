@@ -24,27 +24,24 @@ namespace _Sharyq
         private float damping = 0.5f;
         [SerializeField]
         private int solverIterations = 20;
-
-        [Header("Held State")]
-        [Tooltip("Direction the line hangs while held, in anchorPoint local space.")]
         [SerializeField]
         private Vector3 heldLocalDirection = new Vector3(0f, -1f, 0.3f);
 
         private const float HookOffset = 0.05f;
 
-        private Rigidbody[] _bodies;
-        private LineRenderer _lineRenderer;
-        private float _segLen;
-        private bool _isHeld;
+        private Rigidbody[] bodies;
+        private LineRenderer lineRenderer;
+        private float segLen;
+        private bool isHeld;
 
-        public bool IsHeld => _isHeld;
+        public bool IsHeld => isHeld;
 
         private void Start()
         {
             // Init
-            _lineRenderer = GetComponent<LineRenderer>();
-            _bodies = new Rigidbody[segments];
-            _segLen = ropeLength / segments;
+            lineRenderer = GetComponent<LineRenderer>();
+            bodies = new Rigidbody[segments];
+            segLen = ropeLength / segments;
 
             Vector3 dir = anchorPoint.TransformDirection(heldLocalDirection).normalized;
             Rigidbody prev = anchor;
@@ -53,7 +50,7 @@ namespace _Sharyq
             // Chain Building
             for (int i = 0; i < segments; i++)
             {
-                pos += dir * _segLen;
+                pos += dir * segLen;
 
                 var go = new GameObject($"RopeSeg_{i}");
                 go.transform.position = pos;
@@ -74,11 +71,11 @@ namespace _Sharyq
                     : Vector3.zero;
 
                 joint.xMotion = joint.yMotion = joint.zMotion = ConfigurableJointMotion.Limited;
-                joint.linearLimit = new SoftJointLimit { limit = _segLen };
+                joint.linearLimit = new SoftJointLimit { limit = segLen };
                 joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Free;
                 joint.enablePreprocessing = false;
 
-                _bodies[i] = rb;
+                bodies[i] = rb;
                 prev = rb;
             }
 
@@ -103,18 +100,18 @@ namespace _Sharyq
             foreach (var r in rodCols)
                 Physics.IgnoreCollision(h, r);
 
-            _lineRenderer.positionCount = segments + 2;
+            lineRenderer.positionCount = segments + 2;
 
             hook.maxLinearVelocity = 15f;
             hook.solverIterations = solverIterations;
             hook.interpolation = RigidbodyInterpolation.Interpolate;
             hook.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
-            // start held: frozen, straight, constant length
+            // start held
             SetHeld(true);
         }
 
-        // Hard cap: the hook can never be farther than the rope length from the rod tip
+        // the hook can never be farther than the rope length from the rod tip
         private void AddLengthCap()
         {
             var cap = hook.gameObject.AddComponent<ConfigurableJoint>();
@@ -131,17 +128,17 @@ namespace _Sharyq
 
         private void FixedUpdate()
         {
-            if (_isHeld) LayoutHeld();
+            if (isHeld) LayoutHeld();
         }
 
-        // Straight, fixed-length line from the rod tip, following the rod
+        // fixed length, while held out
         private void LayoutHeld()
         {
             Vector3 dir = anchorPoint.TransformDirection(heldLocalDirection).normalized;
             Vector3 start = anchorPoint.position;
 
-            for (int i = 0; i < _bodies.Length; i++)
-                _bodies[i].position = start + dir * (_segLen * (i + 1));
+            for (int i = 0; i < bodies.Length; i++)
+                bodies[i].position = start + dir * (segLen * (i + 1));
 
             hook.position = start + dir * (ropeLength + HookOffset);
             hook.rotation = Quaternion.LookRotation(dir);
@@ -149,9 +146,9 @@ namespace _Sharyq
 
         public void SetHeld(bool held)
         {
-            _isHeld = held;
+            isHeld = held;
 
-            foreach (var b in _bodies) ApplyState(b, held);
+            foreach (var b in bodies) ApplyState(b, held);
             ApplyState(hook, held);
 
             if (held) LayoutHeld();
@@ -176,25 +173,25 @@ namespace _Sharyq
         
         public void Cast(Vector3 velocity)
         {
-            if (!_isHeld) return;
+            if (!isHeld) return;
             SetHeld(false);
             
-            foreach (var body in _bodies) body.linearVelocity = velocity;
+            foreach (var body in bodies) body.linearVelocity = velocity;
             hook.linearVelocity = velocity;
         }
 
-        // Retrieve / reset the hook back to the held state
+        //retrieve
         public void ResetToHeld() => SetHeld(true);
 
         private void LateUpdate()
         {
-            if (_bodies == null) return;
+            if (bodies == null) return;
 
             // use transform.position (not rb.position) so interpolation is respected
-            _lineRenderer.SetPosition(0, anchorPoint.position);
-            for (int i = 0; i < _bodies.Length; i++)
-                _lineRenderer.SetPosition(i + 1, _bodies[i].transform.position);
-            _lineRenderer.SetPosition(_bodies.Length + 1, hook.transform.position);
+            lineRenderer.SetPosition(0, anchorPoint.position);
+            for (int i = 0; i < bodies.Length; i++)
+                lineRenderer.SetPosition(i + 1, bodies[i].transform.position);
+            lineRenderer.SetPosition(bodies.Length + 1, hook.transform.position);
         }
     }
 }
