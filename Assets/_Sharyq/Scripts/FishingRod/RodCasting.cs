@@ -9,21 +9,28 @@ namespace _Sharyq
     {
         [SerializeField]
         private GameObject hookObject;
-        
+
+        [Header("Rope")]
+        [SerializeField]
+        private RopeBuilder rope;
+        [Tooltip("XR Origin root. Controller velocity is reported in tracking space, so it must be converted with this.")]
+        [SerializeField]
+        private Transform xrOrigin;
+
         [Header("Right hand Cast Controls")]
         [SerializeField]
         private InputActionReference castActionRightHandAsset;
-        [SerializeField] 
+        [SerializeField]
         InputActionProperty velocityRightAction;
         [Header("Left hand Cast Controls")]
         [SerializeField]
         private InputActionReference castActionLeftHandAsset;
-        [SerializeField] 
+        [SerializeField]
         InputActionProperty velocityLeftAction;
-        
+
         private XRGrabInteractable _grabInteractable;
         private NearFarInteractor _interactor;
-        
+
         private InputActionReference _handToUse;
         private InputActionProperty _velocityToUse;
 
@@ -32,6 +39,10 @@ namespace _Sharyq
             _grabInteractable = GetComponent<XRGrabInteractable>();
             if (_grabInteractable == null)
                 Debug.LogWarning("No XRGrabInteractable component found on " + gameObject.name);
+            if (rope == null)
+                Debug.LogWarning("No RopeBuilder assigned on " + gameObject.name);
+            if (xrOrigin == null)
+                Debug.LogWarning("No XR Origin assigned on " + gameObject.name + "; cast direction may be wrong.");
         }
 
         private void OnEnable()
@@ -54,7 +65,7 @@ namespace _Sharyq
                     _handToUse = castActionLeftHandAsset;
                     _velocityToUse = velocityLeftAction;
                     break;
-                case InteractorHandedness.Right: 
+                case InteractorHandedness.Right:
                     _handToUse = castActionRightHandAsset;
                     _velocityToUse = velocityRightAction;
                     break;
@@ -65,14 +76,20 @@ namespace _Sharyq
 
             EnableCastInteraction();
         }
-        
+
         public void OnReleased()
         {
             DisableCastInteraction();
             _interactor = null;
             _handToUse = null;
         }
-        
+
+        // Hook this to a button / UnityEvent to reel the hook back in
+        public void ReelIn()
+        {
+            if (rope != null) rope.ResetToHeld();
+        }
+
         private void EnableCastInteraction()
         {
             if (_handToUse == null) return;
@@ -90,19 +107,23 @@ namespace _Sharyq
             _handToUse.action.Disable();
             _velocityToUse.action.Disable();
         }
-        
+
         private void StartCasting(InputAction.CallbackContext obj)
         {
             // TODO: ADD JUICE TO WIND UP
-            Debug.Log($"Starting Casting");
-        }
-        
-        private void FinishedCasting(InputAction.CallbackContext obj)
-        {
-            Vector3 trackingVel = _velocityToUse.action.ReadValue<Vector3>();
-            Vector3 worldVel = transform.TransformDirection(trackingVel);
-            Debug.Log($"Casted with Speed: {worldVel.magnitude:F2} u/s");
+            Debug.Log("Starting Casting");
         }
 
+        private void FinishedCasting(InputAction.CallbackContext obj)
+        {
+            if (rope == null || !rope.IsHeld) return;
+
+            Vector3 trackingVel = _velocityToUse.action.ReadValue<Vector3>();
+            Transform space = xrOrigin != null ? xrOrigin : transform;
+            Vector3 worldVel = space.TransformDirection(trackingVel);
+
+            Debug.Log($"Casted with Speed: {worldVel.magnitude:F2} u/s");
+            rope.Cast(worldVel);
+        }
     }
 }
