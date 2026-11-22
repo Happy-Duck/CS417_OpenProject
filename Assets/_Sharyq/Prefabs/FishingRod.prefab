@@ -134,34 +134,10 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1067835634848356729}
-        m_TargetAssemblyTypeName: _Sharyq.RodCasting, Assembly-CSharp
-        m_MethodName: OnGrabbed
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1067835634848356729}
-        m_TargetAssemblyTypeName: _Sharyq.RodCasting, Assembly-CSharp
-        m_MethodName: OnReleased
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -269,7 +245,7 @@ MonoBehaviour:
       m_SingletonActionBindings:
       - m_Name: 
         m_Id: d6bf6cdf-f51f-4e7a-94fb-9e778432c560
-        m_Path: <QuestTouchPlusController>{RightHand}/devicePose/velocity
+        m_Path: <XRController>{RightHand}/devicePose/velocity
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -291,7 +267,7 @@ MonoBehaviour:
       m_SingletonActionBindings:
       - m_Name: 
         m_Id: 0d9f809b-584d-413d-b4d6-10adf0f0a98b
-        m_Path: <QuestTouchPlusController>/devicePose/velocity
+        m_Path: <XRController>{LeftHand}/devicePose/velocity
         m_Interactions: 
         m_Processors: 
         m_Groups: 
