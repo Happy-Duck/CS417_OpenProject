@@ -302,7 +302,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4530881048627973562, guid: 067586fb1674a064fbc5d4bc7df97315, type: 3}
 --- !u!114 &1972581521034188438
@@ -327,9 +327,7 @@ MonoBehaviour:
   onItemPlated:
     m_PersistentCalls:
       m_Calls: []
-  onComplete:
-    m_PersistentCalls:
-      m_Calls: []
+  cookingEvents: {fileID: 11400000, guid: 5584e3efe6dc423fbed162226b1367cf, type: 2}
 --- !u!1 &1667804937728651337
 GameObject:
   m_ObjectHideFlags: 0
