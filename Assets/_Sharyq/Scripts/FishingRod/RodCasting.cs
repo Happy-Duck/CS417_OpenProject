@@ -32,7 +32,7 @@ namespace _Sharyq
         
         [Header("Debug")]
         [SerializeField] private bool useDebugVelocity = true;
-        [SerializeField] private float debugVelocity = 5f;
+        [SerializeField] private float debugVelocity = 10f;
         [SerializeField] private Transform debugForwardSource;
 
         private XRGrabInteractable _grabInteractable;
@@ -130,6 +130,7 @@ namespace _Sharyq
 
             Vector3 worldVel = GetWorldCastVelocity();
 
+            Debug.Log("Finish Casting");
             Debug.Log($"Casted with Speed: {worldVel.magnitude:F2} u/s");
             rope.Cast(worldVel);
         }

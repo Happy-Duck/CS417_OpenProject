@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4480428549833953900}
   - component: {fileID: 1357357047108967967}
   - component: {fileID: 2396842745893085681}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,8 @@ GameObject:
   - component: {fileID: 1648861509722683952}
   - component: {fileID: 3039288616129899574}
   - component: {fileID: 4486730101002000241}
-  m_Layer: 0
+  - component: {fileID: 2001960724922160782}
+  m_Layer: 6
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,3 +195,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2001960724922160782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3253479896161688291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421af9c08c6c29943a858a36ba6fe3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Sharyq.Hook
