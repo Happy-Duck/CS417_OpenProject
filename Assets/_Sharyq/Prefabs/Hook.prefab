@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 3039288616129899574}
   - component: {fileID: 4486730101002000241}
   - component: {fileID: 2001960724922160782}
+  - component: {fileID: 1022948214633173331}
   m_Layer: 6
   m_Name: Hook
   m_TagString: Untagged
@@ -207,3 +208,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421af9c08c6c29943a858a36ba6fe3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Sharyq.Hook
+  inWater: 0
+  waterLevel: 0
+--- !u!145 &1022948214633173331
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3253479896161688291}
+  serializedVersion: 4
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_Spring: 100
+  m_Damper: 5
+  m_MinDistance: 0
+  m_MaxDistance: 0
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1

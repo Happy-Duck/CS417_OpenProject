@@ -15,7 +15,6 @@ namespace _Sharyq
         [Header("Rope")]
         [SerializeField]
         private RopeBuilder rope;
-        [Tooltip("XR Origin root. Controller velocity is reported in tracking space, so it must be converted with this.")]
         [SerializeField]
         private Transform xrOrigin;
 

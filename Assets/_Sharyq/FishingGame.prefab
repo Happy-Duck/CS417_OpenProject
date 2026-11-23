@@ -96,6 +96,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1648861509722683952, guid: 990e033cf5144e440841aea1192de25b, type: 3}
   m_PrefabInstance: {fileID: 1977058811509245659}
   m_PrefabAsset: {fileID: 0}
+--- !u!145 &1539616963586955144 stripped
+SpringJoint:
+  m_CorrespondingSourceObject: {fileID: 1022948214633173331, guid: 990e033cf5144e440841aea1192de25b, type: 3}
+  m_PrefabInstance: {fileID: 1977058811509245659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &2678513417116340650 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 4486730101002000241, guid: 990e033cf5144e440841aea1192de25b, type: 3}
@@ -240,6 +245,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7459966574901886775, guid: e7429e52852fd044e8dc30ff64ab0b30, type: 3}
+      propertyPath: hook
+      value: 
+      objectReference: {fileID: 2678513417116340650}
+    - target: {fileID: 7459966574901886775, guid: e7429e52852fd044e8dc30ff64ab0b30, type: 3}
+      propertyPath: lineJoint
+      value: 
+      objectReference: {fileID: 1539616963586955144}
     - target: {fileID: 8832616808239933070, guid: e7429e52852fd044e8dc30ff64ab0b30, type: 3}
       propertyPath: hook
       value: 
