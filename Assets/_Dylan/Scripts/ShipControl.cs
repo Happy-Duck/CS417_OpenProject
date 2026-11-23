@@ -9,9 +9,14 @@ namespace Dylan
         [SerializeField, Min(0f)] private float turnRate = 30f;
         [SerializeField, Min(0f)] private float fullSpeed = 2f;
 
+        private ShipAutopilot autopilot;
+
+        void Awake() => autopilot = GetComponent<ShipAutopilot>();
+
         void LateUpdate()
         {
-            if (helm.CurrentMode == SteeringController.Mode.Steering)
+            if (autopilot.IsAutopilot) return;
+            if (helm.CurrentMode is SteeringController.Mode.Steering or SteeringController.Mode.HelmBraking)
                 transform.Rotate(
                     Vector3.up, helm.SteeringInput * turnRate * Time.deltaTime, Space.World
                 );

@@ -43,7 +43,8 @@ namespace Dylan
 
         void Update()
         {
-            float speed = steering.CurrentMode == SteeringController.Mode.Steering
+            float speed = steering.CurrentMode is 
+                SteeringController.Mode.Steering or SteeringController.Mode.HelmBraking
                 ? Mathf.Abs(steering.SpeedPercent) / 100f
                 : 0f;
             float target = Mathf.Lerp(1f, fullSpeedAperture, speed);

@@ -15,6 +15,7 @@ namespace Dylan
 
         public float SpeedPercent => shipSpeed.Value;
 
+        private float Axis => throttleInput.ReadValue<Vector2>().y;
         private InputAction throttleInput;
         private int previousDirection;
         private float nextStepTime;
@@ -25,7 +26,7 @@ namespace Dylan
 
         internal void UpdateThrottle()
         {
-            float axis = throttleInput.ReadValue<Vector2>().y;
+            float axis = Axis;
             int direction = Mathf.Abs(axis) >= DirectionThreshold ? (int)Mathf.Sign(axis) : 0;
             if (direction == 0)
             {
@@ -46,5 +47,7 @@ namespace Dylan
             shipSpeed.Add(direction * Step);
             nextStepTime += RepeatInterval;
         }
+
+        internal bool HasInput() => Mathf.Abs(Axis) >= DirectionThreshold;
     }
 }

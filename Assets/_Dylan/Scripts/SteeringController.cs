@@ -15,6 +15,7 @@ namespace Dylan
         [SerializeField] private GameObject steeringHUD;
         [SerializeField] private XRControls xrControls;
         [SerializeField] private MapTable mapTable;
+        [SerializeField] private ShipAutopilot autopilot;
 
         [Header("Player")]
         [SerializeField] private XROrigin xrOrigin;
@@ -25,7 +26,7 @@ namespace Dylan
         [SerializeField] private Transform leftVisual;
         [SerializeField] private Transform rightVisual;
 
-        public enum Mode { General, Map, Steering }
+        public enum Mode { General, Map, Steering, Autopiloting, HelmBraking }
 
         public Mode CurrentMode { get; private set; }
         public float WheelAngle => helm.WheelAngle;
@@ -37,6 +38,8 @@ namespace Dylan
         private CurveInteractionCaster leftRay;
         private CurveInteractionCaster rightRay;
         private XRBaseInteractor[] handInteractors;
+
+        private Mode DefaultMode => autopilot.IsAutopilot ? Mode.Autopiloting : Mode.General;
 
         void Awake()
         {
@@ -62,29 +65,44 @@ namespace Dylan
 
         void Update()
         {
-            if (CurrentMode == Mode.Map)
+            switch (CurrentMode)
             {
-                if (mapTable.CloseRequested) ExitMap();
-                else mapTable.UpdateCamera();
-                return;
-            }
+                case Mode.General:
+                case Mode.Autopiloting:
+                    CurrentMode = DefaultMode;
+                    if (CanEnterMap()) EnterMap();
+                    if (CanEnterHelm()) EnterHelm();
+                    break;
 
-            if (CurrentMode == Mode.Steering)
-            {
-                if (helm.ExitRequested) ExitHelm();
-                else throttle.UpdateThrottle();
-                return;
-            }
+                case Mode.Map:
+                    if (mapTable.CloseRequested) ExitMap();
+                    else mapTable.UpdateCamera();
+                    break;
 
-            if (CurrentMode != Mode.General) return;
-            // General mode
-            if (CanEnterMap()) EnterMap();
-            if (CanEnterHelm()) EnterHelm();
+                case Mode.Steering:
+                case Mode.HelmBraking:
+                    if (helm.ExitRequested)
+                    {
+                        ExitHelm();
+                        break;
+                    }
+
+                    if (CurrentMode == Mode.HelmBraking)
+                    {
+                        if (throttle.HasInput()) autopilot.TakeManualControl();
+                        if (autopilot.IsAutopilot) break;
+                        CurrentMode = Mode.Steering;
+                    }
+
+                    throttle.UpdateThrottle();
+                    break;
+            }
         }
 
         void LateUpdate()
         {
-            if (CurrentMode == Mode.Steering) helm.UpdateWheel(leftController, rightController);
+            if (CurrentMode is Mode.Steering or Mode.HelmBraking) 
+                helm.UpdateWheel(leftController, rightController);
             else if (CurrentMode == Mode.Map) mapTable.UpdatePortLabels();
         }
 
@@ -119,7 +137,7 @@ namespace Dylan
 
         private void ExitMap()
         {
-            CurrentMode = Mode.General;
+            CurrentMode = DefaultMode;
             mapTable.Close();
             xrControls.Restore();
         }
@@ -140,15 +158,16 @@ namespace Dylan
 
             helm.Begin(leftVisual, rightVisual);
             throttle.Begin();
-            CurrentMode = Mode.Steering;
+            autopilot.CancelAutopilot();
+            CurrentMode = autopilot.IsAutopilot ? Mode.HelmBraking : Mode.Steering;
             steeringHUD.SetActive(true);
         }
 
         private void ExitHelm()
         {
-            if (CurrentMode != Mode.Steering) return;
+            if (CurrentMode is not (Mode.Steering or Mode.HelmBraking)) return;
 
-            CurrentMode = Mode.General;
+            CurrentMode = DefaultMode;
             steeringHUD.SetActive(false);
             helm.End();
             xrOrigin.Origin.transform.position -= Vector3.up * steeringHeightOffset;
