@@ -288,10 +288,18 @@ PrefabInstance:
     - {fileID: 3277562384758804242, guid: 65a99454abe0c1546972817712fb59a6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 314616414365026220, guid: 65a99454abe0c1546972817712fb59a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 233920237}
     - targetCorrespondingSourceObject: {fileID: 4599326365547549519, guid: 65a99454abe0c1546972817712fb59a6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 233920236}
   m_SourcePrefab: {fileID: 100100000, guid: 65a99454abe0c1546972817712fb59a6, type: 3}
+--- !u!1 &233920234 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 314616414365026220, guid: 65a99454abe0c1546972817712fb59a6, type: 3}
+  m_PrefabInstance: {fileID: 233920233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &233920235 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4599326365547549519, guid: 65a99454abe0c1546972817712fb59a6, type: 3}
@@ -318,6 +326,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.0648782, y: 0.5, z: 2.0648782}
   m_Center: {x: 7.8214044e-24, y: 0, z: 8.764363e-25}
+--- !u!114 &233920237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233920234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7dbdbadcee2854eb743ea728c9ed7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.TutorialPopup
+  message: Chop the fish!
+  id: 
+  triggerMode: 1
+  showDistance: 1.5
+  hideAfterSeconds: 6
+  offset: {x: 0, y: 0.4, z: 0}
+  characterSize: 0.012
+  onlyWhenPlaced: 0
 --- !u!1001 &698561740
 PrefabInstance:
   m_ObjectHideFlags: 0
