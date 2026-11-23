@@ -52,6 +52,7 @@ namespace _Sharyq
                 Debug.LogWarning("No RopeBuilder assigned on " + gameObject.name);
             if (xrOrigin == null)
                 Debug.LogWarning("No XR Origin assigned on " + gameObject.name + "; cast direction may be wrong.");
+            hookObject.transform.SetParent(null, true);
         }
 
         private void OnEnable()
