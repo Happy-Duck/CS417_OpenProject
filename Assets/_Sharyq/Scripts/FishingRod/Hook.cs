@@ -6,6 +6,7 @@ namespace _Sharyq
     public class Hook : MonoBehaviour
     {
         [SerializeField] private Transform rodTip;
+        [SerializeField] private RopeBuilder rope;
         [SerializeField] private bool inWater;
         [SerializeField] private float waterLevel = -6f;
 
@@ -16,8 +17,6 @@ namespace _Sharyq
         {
             rb = GetComponent<Rigidbody>();
         }
-
-        public void SetRodTip(Transform tip) => rodTip = tip;
 
         private void FixedUpdate()
         {
@@ -35,7 +34,6 @@ namespace _Sharyq
         {
             inWater = true;
 
-            // Remember how far the hook is from the rod tip at the moment it hits the water
             lockedDistance = rodTip != null
                 ? Vector3.Distance(rodTip.position, rb.position)
                 : 0f;
@@ -56,30 +54,29 @@ namespace _Sharyq
 
         private void LockToSurface()
         {
+            if (rodTip == null) return;
+            
+            if (rope != null)
+                lockedDistance = Mathf.Min(lockedDistance, rope.CurrentLength);
+
+            Vector3 tip = rodTip.position;
             Vector3 pos = rb.position;
             pos.y = waterLevel;
 
-            if (rodTip != null)
+            Vector3 flat = new Vector3(pos.x - tip.x, 0f, pos.z - tip.z);
+            if (flat.sqrMagnitude < 0.0001f)
             {
-                Vector3 tip = rodTip.position;
-
-                // Horizontal direction from rod tip to hook
-                Vector3 flat = new Vector3(pos.x - tip.x, 0f, pos.z - tip.z);
-                if (flat.sqrMagnitude < 0.0001f)
-                {
-                    flat = Vector3.ProjectOnPlane(rodTip.forward, Vector3.up);
-                    if (flat.sqrMagnitude < 0.0001f) flat = Vector3.forward;
-                }
-                flat.Normalize();
-
-                // Keep the true 3D distance equal to lockedDistance while sitting at water level
-                float dy = waterLevel - tip.y;
-                float radiusSqr = lockedDistance * lockedDistance - dy * dy;
-                float radius = radiusSqr > 0f ? Mathf.Sqrt(radiusSqr) : 0f;
-
-                pos.x = tip.x + flat.x * radius;
-                pos.z = tip.z + flat.z * radius;
+                flat = Vector3.ProjectOnPlane(rodTip.forward, Vector3.up);
+                if (flat.sqrMagnitude < 0.0001f) flat = Vector3.forward;
             }
+            flat.Normalize();
+
+            float dy = waterLevel - tip.y;
+            float radiusSqr = lockedDistance * lockedDistance - dy * dy;
+            float radius = radiusSqr > 0f ? Mathf.Sqrt(radiusSqr) : 0f;
+
+            pos.x = tip.x + flat.x * radius;
+            pos.z = tip.z + flat.z * radius;
 
             rb.position = pos;
             if (!rb.isKinematic)
