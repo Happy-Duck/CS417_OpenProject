@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 8557911461910197792}
   - component: {fileID: 2486102837952737035}
   - component: {fileID: 7323785860325644024}
+  - component: {fileID: 6116577009902984572}
   m_Layer: 0
   m_Name: Salmon Sashimi
   m_TagString: Untagged
@@ -318,3 +319,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Alyssa.PlateItem
   dish: {fileID: 11400000, guid: f61151cedbaa7b64cab6aeadaf97e93c, type: 2}
   plated: 0
+--- !u!114 &6116577009902984572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109344541437246865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3b427390c9abe4caa29af532c099b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.RollIngredient
+  ingredient: {fileID: 11400000, guid: 5433efb36b4d54c41bca1952eb8558fd, type: 2}

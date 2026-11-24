@@ -17,6 +17,13 @@ namespace Alyssa
 
         public bool TrySpread()
         {
+            Nori nori = GetComponentInParent<Nori>();
+            if (nori != null && !nori.OnMat)
+            {
+                onRejected.Invoke();
+                return false;
+            }
+
             if (hasRice)
             {
                 onRejected.Invoke();
