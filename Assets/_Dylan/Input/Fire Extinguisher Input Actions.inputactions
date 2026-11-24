@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "Fire Extinguisher Input Actions",
+    "maps": [
+        {
+            "name": "Fire Extinguisher",
+            "id": "b2737803-f3aa-4454-8b91-9631893bcadc",
+            "actions": [
+                {
+                    "name": "LeftActivate",
+                    "type": "Button",
+                    "id": "67c438d5-ea2d-4506-ae7f-daa5fec5197f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RightActivate",
+                    "type": "Button",
+                    "id": "c771d8da-1039-4b03-8e30-f5f3ebfd7dff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "98d464b8-03f2-4b63-b6e5-ad497f280403",
+                    "path": "<XRController>{LeftHand}/{TriggerButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftActivate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7cb57bf7-485c-483d-862b-a051ef671f8c",
+                    "path": "<XRController>{RightHand}/{TriggerButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightActivate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
