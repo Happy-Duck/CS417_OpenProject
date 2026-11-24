@@ -36,8 +36,11 @@ namespace _Sharyq
         private ConfigurableJoint capJoint;
         private LineRenderer lineRenderer;
         private bool isHeld;
+        private float currentLength;
 
         public bool IsHeld => isHeld;
+        public float HeldLength => heldLength;
+        public float CurrentLength => currentLength;
 
         private void Start()
         {
@@ -132,6 +135,7 @@ namespace _Sharyq
 
         private void SetRopeLength(float length)
         {
+            currentLength = length;
             float seg = length / segments;
             foreach (var j in joints)
                 j.linearLimit = new SoftJointLimit { limit = seg };
@@ -162,7 +166,11 @@ namespace _Sharyq
         {
             isHeld = held;
 
-            if (held) SetRopeLength(heldLength);
+            if (held)
+            {
+                SetRopeLength(heldLength);
+                if (hook.TryGetComponent(out Hook hookScript)) hookScript.LeaveWater();
+            }
 
             foreach (var b in bodies) ApplyState(b, held);
             ApplyState(hook, held);
@@ -196,6 +204,14 @@ namespace _Sharyq
             for (int i = 0; i < bodies.Length; i++)
                 bodies[i].linearVelocity = velocity * ((i + 1f) / (bodies.Length + 1f));
             hook.linearVelocity = velocity;
+        }
+
+        public void ReelTo(float length)
+        {
+            if (isHeld) return;
+            length = Mathf.Max(heldLength, length);
+            SetRopeLength(length);
+            if (length <= heldLength + 0.001f) SetHeld(true);
         }
 
         //retrieve
