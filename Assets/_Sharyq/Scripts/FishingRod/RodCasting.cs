@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
@@ -13,7 +15,6 @@ namespace _Sharyq
         [Header("Rope")]
         [SerializeField]
         private RopeBuilder rope;
-        [Tooltip("XR Origin root. Controller velocity is reported in tracking space, so it must be converted with this.")]
         [SerializeField]
         private Transform xrOrigin;
 
@@ -27,6 +28,11 @@ namespace _Sharyq
         private InputActionReference castActionLeftHandAsset;
         [SerializeField]
         InputActionProperty velocityLeftAction;
+        
+        [Header("Debug")]
+        [SerializeField] private bool useDebugVelocity = true;
+        [SerializeField] private float debugVelocity = 10f;
+        [SerializeField] private Transform debugForwardSource;
 
         private XRGrabInteractable _grabInteractable;
         private NearFarInteractor _interactor;
@@ -37,12 +43,15 @@ namespace _Sharyq
         private void Awake()
         {
             _grabInteractable = GetComponent<XRGrabInteractable>();
+            _grabInteractable.selectEntered.AddListener(OnGrabbed);
+            _grabInteractable.selectExited.AddListener(OnReleased);
             if (_grabInteractable == null)
                 Debug.LogWarning("No XRGrabInteractable component found on " + gameObject.name);
             if (rope == null)
                 Debug.LogWarning("No RopeBuilder assigned on " + gameObject.name);
             if (xrOrigin == null)
                 Debug.LogWarning("No XR Origin assigned on " + gameObject.name + "; cast direction may be wrong.");
+            hookObject.transform.SetParent(null, true);
         }
 
         private void OnEnable()
@@ -55,7 +64,7 @@ namespace _Sharyq
             DisableCastInteraction();
         }
 
-        public void OnGrabbed()
+        public void OnGrabbed(SelectEnterEventArgs arg0)
         {
             _interactor = _grabInteractable.firstInteractorSelecting as NearFarInteractor;
             if (_interactor == null) return;
@@ -77,7 +86,7 @@ namespace _Sharyq
             EnableCastInteraction();
         }
 
-        public void OnReleased()
+        public void OnReleased(SelectExitEventArgs arg0)
         {
             DisableCastInteraction();
             _interactor = null;
@@ -118,12 +127,40 @@ namespace _Sharyq
         {
             if (rope == null || !rope.IsHeld) return;
 
-            Vector3 trackingVel = _velocityToUse.action.ReadValue<Vector3>();
-            Transform space = xrOrigin != null ? xrOrigin : transform;
-            Vector3 worldVel = space.TransformDirection(trackingVel);
+            Vector3 worldVel = GetWorldCastVelocity();
 
+            Debug.Log("Finish Casting");
             Debug.Log($"Casted with Speed: {worldVel.magnitude:F2} u/s");
             rope.Cast(worldVel);
+        }
+        
+        private Vector3 GetWorldCastVelocity()
+        {
+            if (useDebugVelocity)
+                return GetDebugForward() * debugVelocity;
+
+            if (_velocityToUse.action == null) return Vector3.zero;
+
+            Vector3 trackingVel = _velocityToUse.action.ReadValue<Vector3>();
+            Transform space = xrOrigin != null ? xrOrigin : transform;
+            return space.TransformDirection(trackingVel);
+        }
+
+        private Vector3 GetDebugForward()
+        {
+            Transform source = debugForwardSource;
+            if (source == null && Camera.main != null) source = Camera.main.transform;
+            if (source == null) source = xrOrigin != null ? xrOrigin : transform;
+
+            // Flatten so looking up/down doesn't change the cast heading
+            Vector3 flat = Vector3.ProjectOnPlane(source.forward, Vector3.up);
+            return flat.sqrMagnitude > 0.0001f ? flat.normalized : source.forward;
+        }
+
+        private void OnDestroy()
+        {
+            _grabInteractable.selectEntered.RemoveListener(OnGrabbed);
+            _grabInteractable.selectExited.RemoveListener(OnReleased);
         }
     }
 }

@@ -15,9 +15,11 @@ namespace _Sharyq
 
         [Header("Rope Settings")]
         [SerializeField]
-        private int segments = 12;
+        private int segments = 24;
         [SerializeField]
-        private float ropeLength = 1.0f;
+        private float heldLength = 0.5f;
+        [SerializeField]
+        private float castLength = 8f;
         [SerializeField]
         private float segmentMass = 0.02f;
         [SerializeField]
@@ -30,18 +32,23 @@ namespace _Sharyq
         private const float HookOffset = 0.05f;
 
         private Rigidbody[] bodies;
+        private ConfigurableJoint[] joints;
+        private ConfigurableJoint capJoint;
         private LineRenderer lineRenderer;
-        private float segLen;
         private bool isHeld;
+        private float currentLength;
 
         public bool IsHeld => isHeld;
+        public float HeldLength => heldLength;
+        public float CurrentLength => currentLength;
 
         private void Start()
         {
             // Init
             lineRenderer = GetComponent<LineRenderer>();
             bodies = new Rigidbody[segments];
-            segLen = ropeLength / segments;
+            joints = new ConfigurableJoint[segments];
+            float segLen = heldLength / segments;
 
             Vector3 dir = anchorPoint.TransformDirection(heldLocalDirection).normalized;
             Rigidbody prev = anchor;
@@ -75,6 +82,7 @@ namespace _Sharyq
                 joint.angularXMotion = joint.angularYMotion = joint.angularZMotion = ConfigurableJointMotion.Free;
                 joint.enablePreprocessing = false;
 
+                joints[i] = joint;
                 bodies[i] = rb;
                 prev = rb;
             }
@@ -114,16 +122,25 @@ namespace _Sharyq
         // the hook can never be farther than the rope length from the rod tip
         private void AddLengthCap()
         {
-            var cap = hook.gameObject.AddComponent<ConfigurableJoint>();
-            cap.connectedBody = anchor;
-            cap.autoConfigureConnectedAnchor = false;
-            cap.anchor = Vector3.zero;
-            cap.connectedAnchor = anchor.transform.InverseTransformPoint(anchorPoint.position);
+            capJoint = hook.gameObject.AddComponent<ConfigurableJoint>();
+            capJoint.connectedBody = anchor;
+            capJoint.autoConfigureConnectedAnchor = false;
+            capJoint.anchor = Vector3.zero;
+            capJoint.connectedAnchor = anchor.transform.InverseTransformPoint(anchorPoint.position);
 
-            cap.xMotion = cap.yMotion = cap.zMotion = ConfigurableJointMotion.Limited;
-            cap.linearLimit = new SoftJointLimit { limit = ropeLength + HookOffset, bounciness = 0f };
-            cap.angularXMotion = cap.angularYMotion = cap.angularZMotion = ConfigurableJointMotion.Free;
-            cap.enablePreprocessing = false;
+            capJoint.xMotion = capJoint.yMotion = capJoint.zMotion = ConfigurableJointMotion.Limited;
+            capJoint.angularXMotion = capJoint.angularYMotion = capJoint.angularZMotion = ConfigurableJointMotion.Free;
+            capJoint.enablePreprocessing = false;
+        }
+
+        private void SetRopeLength(float length)
+        {
+            currentLength = length;
+            float seg = length / segments;
+            foreach (var j in joints)
+                j.linearLimit = new SoftJointLimit { limit = seg };
+
+            capJoint.linearLimit = new SoftJointLimit { limit = length + HookOffset, bounciness = 0f };
         }
 
         private void FixedUpdate()
@@ -136,17 +153,24 @@ namespace _Sharyq
         {
             Vector3 dir = anchorPoint.TransformDirection(heldLocalDirection).normalized;
             Vector3 start = anchorPoint.position;
+            float segLen = heldLength / segments;
 
             for (int i = 0; i < bodies.Length; i++)
                 bodies[i].position = start + dir * (segLen * (i + 1));
 
-            hook.position = start + dir * (ropeLength + HookOffset);
+            hook.position = start + dir * (heldLength + HookOffset);
             hook.rotation = Quaternion.LookRotation(dir);
         }
 
         public void SetHeld(bool held)
         {
             isHeld = held;
+
+            if (held)
+            {
+                SetRopeLength(heldLength);
+                if (hook.TryGetComponent(out Hook hookScript)) hookScript.LeaveWater();
+            }
 
             foreach (var b in bodies) ApplyState(b, held);
             ApplyState(hook, held);
@@ -170,14 +194,24 @@ namespace _Sharyq
                 rb.isKinematic = false;
             }
         }
-        
+
         public void Cast(Vector3 velocity)
         {
             if (!isHeld) return;
             SetHeld(false);
-            
-            foreach (var body in bodies) body.linearVelocity = velocity;
+            SetRopeLength(castLength);
+
+            for (int i = 0; i < bodies.Length; i++)
+                bodies[i].linearVelocity = velocity * ((i + 1f) / (bodies.Length + 1f));
             hook.linearVelocity = velocity;
+        }
+
+        public void ReelTo(float length)
+        {
+            if (isHeld) return;
+            length = Mathf.Max(heldLength, length);
+            SetRopeLength(length);
+            if (length <= heldLength + 0.001f) SetHeld(true);
         }
 
         //retrieve
