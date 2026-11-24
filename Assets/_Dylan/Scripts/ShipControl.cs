@@ -11,7 +11,7 @@ namespace Dylan
 
         void LateUpdate()
         {
-            if (helm.IsSteering)
+            if (helm.CurrentMode == SteeringController.Mode.Steering)
                 transform.Rotate(
                     Vector3.up, helm.SteeringInput * turnRate * Time.deltaTime, Space.World
                 );

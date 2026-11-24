@@ -1,27 +1,31 @@
-using System;
 using Shared;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Dylan
 {
-    [Serializable]
-    public sealed class ThrottleControl
+    public sealed class ThrottleControl : MonoBehaviour
     {
         private const float Step = 10f;
         private const float RepeatInterval = 0.5f;
         private const float DirectionThreshold = 0.5f;
 
+        [SerializeField] private XRControls xrControls;
         [SerializeField] private Stat shipSpeed;
 
         public float SpeedPercent => shipSpeed.Value;
 
+        private InputAction throttleInput;
         private int previousDirection;
         private float nextStepTime;
 
+        void Awake() => throttleInput = xrControls.HelmActions.FindAction("Throttle", true);
+
         internal void Begin() => previousDirection = 0;
 
-        internal void UpdateThrottle(float axis)
+        internal void UpdateThrottle()
         {
+            float axis = throttleInput.ReadValue<Vector2>().y;
             int direction = Mathf.Abs(axis) >= DirectionThreshold ? (int)Mathf.Sign(axis) : 0;
             if (direction == 0)
             {

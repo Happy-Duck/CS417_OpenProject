@@ -4,21 +4,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
-using UnityEngine.XR.Interaction.Toolkit.Locomotion;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Casters;
 
 namespace Dylan
 {
     public class SteeringController : MonoBehaviour
     {
-        [Header("Input")]
-        [SerializeField] private InputActionReference enterHelm;
-        [SerializeField] private InputActionReference exitHelm;
-        [SerializeField] private InputActionReference throttleInput;
-
-        [SerializeField] private HelmControl helm = new();
-        [SerializeField] private ThrottleControl throttle = new();
+        [SerializeField] private HelmControl helm;
+        [SerializeField] private ThrottleControl throttle;
         [SerializeField] private GameObject steeringHUD;
+        [SerializeField] private XRControls xrControls;
+        [SerializeField] private MapTable mapTable;
 
         [Header("Player")]
         [SerializeField] private XROrigin xrOrigin;
@@ -29,80 +25,110 @@ namespace Dylan
         [SerializeField] private Transform leftVisual;
         [SerializeField] private Transform rightVisual;
 
-        public bool IsSteering { get; private set; }
+        public enum Mode { General, Map, Steering }
+
+        public Mode CurrentMode { get; private set; }
         public float WheelAngle => helm.WheelAngle;
         public float SteeringInput => helm.SteeringInput;
         public float SpeedPercent => throttle.SpeedPercent;
 
+        private InputAction leftTrigger;
+        private InputAction rightTrigger;
+        private CurveInteractionCaster leftRay;
+        private CurveInteractionCaster rightRay;
         private XRBaseInteractor[] handInteractors;
-        private GameObject[] interactorObjects;
-        private Behaviour[] suspendedBehaviours;
-        private bool[] interactorWasActive;
-        private bool[] behaviourWasEnabled;
 
         void Awake()
         {
-            helm.Initialize();
+            var generalActions = xrControls.GeneralActions;
+            leftTrigger = generalActions.FindAction("LeftTrigger", true);
+            rightTrigger = generalActions.FindAction("RightTrigger", true);
+
+            leftRay = (CurveInteractionCaster)leftController
+                .GetComponentInChildren<NearFarInteractor>(true).farInteractionCaster;
+            rightRay = (CurveInteractionCaster)rightController
+                .GetComponentInChildren<NearFarInteractor>(true).farInteractionCaster;
+
             handInteractors =
                 leftController.GetComponentsInChildren<XRBaseInteractor>(true)
                 .Concat(rightController.GetComponentsInChildren<XRBaseInteractor>(true)).ToArray();
-            interactorObjects =
-                xrOrigin.GetComponentsInChildren<XRBaseInteractor>(true)
-                .Select(interactor => interactor.gameObject).Distinct().ToArray();
-            suspendedBehaviours =
-                xrOrigin.GetComponentsInChildren<ControllerInputActionManager>(true)
-                .Cast<Behaviour>()
-                .Concat(xrOrigin.GetComponentsInChildren<LocomotionProvider>(true)).ToArray();
-            interactorWasActive = new bool[interactorObjects.Length];
-            behaviourWasEnabled = new bool[suspendedBehaviours.Length];
-        }
-
-        void OnEnable()
-        {
-            enterHelm.action.Enable();
-            exitHelm.action.Enable();
-            throttleInput.action.Enable();
         }
 
         void OnDisable()
         {
-            enterHelm.action.Disable();
-            exitHelm.action.Disable();
-            throttleInput.action.Disable();
-            ExitHelm();
+            if (CurrentMode == Mode.Map) ExitMap();
+            else ExitHelm();
         }
 
         void Update()
         {
-            if (!IsSteering && enterHelm.action.triggered) TryEnterHelm();
-            else if (IsSteering && exitHelm.action.triggered) ExitHelm();
+            if (CurrentMode == Mode.Map)
+            {
+                if (mapTable.CloseRequested) ExitMap();
+                else mapTable.UpdateCamera();
+                return;
+            }
 
-            if (IsSteering) throttle.UpdateThrottle(throttleInput.action.ReadValue<Vector2>().y);
+            if (CurrentMode == Mode.Steering)
+            {
+                if (helm.ExitRequested) ExitHelm();
+                else throttle.UpdateThrottle();
+                return;
+            }
+
+            if (CurrentMode != Mode.General) return;
+            // General mode
+            if (CanEnterMap()) EnterMap();
+            if (CanEnterHelm()) EnterHelm();
         }
 
         void LateUpdate()
         {
-            if (IsSteering) helm.UpdateWheel(leftController, rightController);
+            if (CurrentMode == Mode.Steering) helm.UpdateWheel(leftController, rightController);
+            else if (CurrentMode == Mode.Map) mapTable.UpdatePortLabels();
         }
 
-        private void TryEnterHelm()
+        private bool CanEnterMap() => TriggerHits(mapTable.transform);
+
+        private bool CanEnterHelm() => TriggerHits(transform)
+            && !handInteractors.Any(interactor => interactor.hasSelection);
+
+        // Press Trigger while pointing the target.
+        private bool TriggerHits(Transform target) =>
+            (leftTrigger.triggered && HitsTarget(leftRay, target))
+            || (rightTrigger.triggered && HitsTarget(rightRay, target));
+
+        // Check if the raycast hits the target.
+        private static bool HitsTarget(CurveInteractionCaster caster, Transform target)
         {
-            // return if any hand interactor is currently selecting an object.
-            if (handInteractors.Any(interactor => interactor.hasSelection)) return;
+            if (!caster.isActiveAndEnabled) return false;
+
+            Transform origin = caster.effectiveCastOrigin;
+            return Physics.Raycast(origin.position, origin.forward, out var hit, caster.castDistance,
+                Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore)
+                && hit.collider.transform.IsChildOf(target);
+        }
+
+        private void EnterMap()
+        {
+            if (!xrControls.SwitchActionMap(xrControls.MapActions)) return;
+
+            CurrentMode = Mode.Map;
+            mapTable.Open();
+        }
+
+        private void ExitMap()
+        {
+            CurrentMode = Mode.General;
+            mapTable.Close();
+            xrControls.Restore();
+        }
+
+        private void EnterHelm()
+        {
+            if (!xrControls.SwitchActionMap(xrControls.HelmActions)) return;
 
             var head = xrOrigin.Camera.transform;
-
-            // Store the current state of the interactor objects and suspended behaviours.
-            for (int i = 0; i < interactorObjects.Length; i++)
-                interactorWasActive[i] = interactorObjects[i].activeSelf;
-            for (int i = 0; i < suspendedBehaviours.Length; i++)
-                behaviourWasEnabled[i] = suspendedBehaviours[i].enabled;
-
-            // Disable the interactor objects and suspended behaviours.
-            foreach (var behaviour in suspendedBehaviours)
-                behaviour.enabled = false;
-            foreach (var interactor in interactorObjects)
-                interactor.SetActive(false);
 
             // Teleport the player to the helm station and rotate them to face forward.
             xrOrigin.RotateAroundCameraUsingOriginUp(
@@ -114,26 +140,20 @@ namespace Dylan
 
             helm.Begin(leftVisual, rightVisual);
             throttle.Begin();
-            IsSteering = true;
+            CurrentMode = Mode.Steering;
             steeringHUD.SetActive(true);
         }
 
         private void ExitHelm()
         {
-            if (!IsSteering) return;
+            if (CurrentMode != Mode.Steering) return;
 
-            IsSteering = false;
+            CurrentMode = Mode.General;
             steeringHUD.SetActive(false);
             helm.End();
-            if (xrOrigin != null && xrOrigin.Origin != null)
-                xrOrigin.Origin.transform.position -= Vector3.up * steeringHeightOffset;
+            xrOrigin.Origin.transform.position -= Vector3.up * steeringHeightOffset;
 
-            // Restore the state of the interactor objects and suspended behaviours.
-            for (int i = 0; i < suspendedBehaviours.Length; i++)
-                if (suspendedBehaviours[i] != null)
-                    suspendedBehaviours[i].enabled = behaviourWasEnabled[i];
-            for (int i = 0; i < interactorObjects.Length; i++)
-                interactorObjects[i]?.SetActive(interactorWasActive[i]);
+            xrControls.Restore();
         }
     }
 }

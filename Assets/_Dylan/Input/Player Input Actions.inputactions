@@ -1,0 +1,241 @@
+{
+    "version": 1,
+    "name": "Player Input Actions",
+    "maps": [
+        {
+            "name": "General",
+            "id": "214a4375-ff07-44c9-be76-21e840e485c3",
+            "actions": [
+                {
+                    "name": "LeftTrigger",
+                    "type": "Button",
+                    "id": "73ed79d2-02e3-4c59-ba80-2fefe1fe9a10",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press(behavior=0)",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "RightTrigger",
+                    "type": "Button",
+                    "id": "f80a901e-c785-44a0-b162-83b7850c82f8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press(behavior=0)",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "20099955-f2ae-43a9-a208-ebac492501bc",
+                    "path": "<XRController>{LeftHand}/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1daf9194-f77a-45e4-b4c8-2d5ec9d425e7",
+                    "path": "<XRController>{RightHand}/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Helm",
+            "id": "d500d40c-e599-4a12-a6c3-d09a64ec8324",
+            "actions": [
+                {
+                    "name": "ExitHelm",
+                    "type": "Button",
+                    "id": "40d4ba98-8be0-42c2-80fd-08c085aaa906",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press(behavior=0)",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Throttle",
+                    "type": "Value",
+                    "id": "b4125c4c-282f-4c6c-a6bb-469df7c887b8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "95129066-e5b0-471d-b825-c391a68fa9cc",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitHelm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82ca60c2-bfe7-4469-b116-1d25dd39fe5a",
+                    "path": "<XRController>{LeftHand}/{Primary2DAxis}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throttle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Map",
+            "id": "79a0cc51-d42f-41b8-9277-000000000001",
+            "actions": [
+                {
+                    "name": "Pan",
+                    "type": "Value",
+                    "id": "79a0cc51-d42f-41b8-9277-000000000002",
+                    "expectedControlType": "Vector2",
+                    "processors": "stickDeadzone",
+                    "interactions": "",
+                    "initialStateCheck": true,
+                    "priority": 0
+                },
+                {
+                    "name": "Zoom Out",
+                    "type": "Button",
+                    "id": "79a0cc51-d42f-41b8-9277-000000000003",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Zoom In",
+                    "type": "Button",
+                    "id": "79a0cc51-d42f-41b8-9277-000000000004",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Close Map",
+                    "type": "Button",
+                    "id": "79a0cc51-d42f-41b8-9277-000000000005",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Select Island",
+                    "type": "Value",
+                    "id": "79a0cc51-d42f-41b8-9277-000000000006",
+                    "expectedControlType": "Vector2",
+                    "processors": "stickDeadzone",
+                    "interactions": "",
+                    "initialStateCheck": true,
+                    "priority": 0
+                },
+                {
+                    "name": "Confirm Island",
+                    "type": "Button",
+                    "id": "79a0cc51-d42f-41b8-9277-000000000007",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "79a0cc51-d42f-41b8-9277-000000000008",
+                    "path": "<XRController>{LeftHand}/{Primary2DAxis}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pan",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79a0cc51-d42f-41b8-9277-000000000009",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom Out",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79a0cc51-d42f-41b8-9277-00000000000a",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom In",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79a0cc51-d42f-41b8-9277-00000000000b",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close Map",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79a0cc51-d42f-41b8-9277-00000000000c",
+                    "path": "<XRController>{RightHand}/{Primary2DAxis}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select Island",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79a0cc51-d42f-41b8-9277-00000000000d",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm Island",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

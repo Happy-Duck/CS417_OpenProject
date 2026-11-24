@@ -1,15 +1,15 @@
-using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR;
 
 namespace Dylan
 {
-    [Serializable]
-    public sealed class HelmControl
+    public sealed class HelmControl : MonoBehaviour
     {
         private const float MinimumHandSeparation = 0.12f;
 
+        [SerializeField] private XRControls xrControls;
         [SerializeField] private Transform wheelPivot;
         [SerializeField] private Transform leftGrip;
         [SerializeField] private Transform rightGrip;
@@ -17,14 +17,20 @@ namespace Dylan
 
         public float WheelAngle { get; private set; }
         public float SteeringInput => WheelAngle / maximumWheelAngle;
+        internal bool ExitRequested => exitHelm.triggered;
 
+        private InputAction exitHelm;
         private Quaternion neutralWheelRotation;
         private VisualPose leftPose;
         private VisualPose rightPose;
         private bool hasReference;
         private Vector3 previousDirection;
 
-        internal void Initialize() => neutralWheelRotation = wheelPivot.localRotation;
+        void Awake()
+        {
+            exitHelm = xrControls.HelmActions.FindAction("ExitHelm", true);
+            neutralWheelRotation = wheelPivot.localRotation;
+        }
 
         internal void Begin(Transform leftVisual, Transform rightVisual)
         {
