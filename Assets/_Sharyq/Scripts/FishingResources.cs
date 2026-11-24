@@ -13,7 +13,7 @@ namespace _Sharyq
             
             rm.Add("Salmon", 0);
             rm.Add("Tuna", 0);
-            
+            rm.Add("Yellow Tail", 0);
             
             rm.Add("Shrimp", 0);
             rm.Add("Scallop", 0);
