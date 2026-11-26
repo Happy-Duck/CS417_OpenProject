@@ -6,7 +6,7 @@ namespace Alyssa
 {
     public class PlateItem : MonoBehaviour
     {
-        public string itemName = "Tuna Sashimi";
+        public DishData dish;
 
         [HideInInspector] public bool plated;
 

@@ -8,18 +8,20 @@ namespace Alyssa
     {
         public BoxCollider zone;
         public Transform[] slots;
-        public string acceptedItem;
-        public string dishName = "Tuna Sashimi Plate";
+        public float rejectCooldown = 1f;
 
         public UnityEvent onItemPlated;
-        //  cookinEvents.OnComplte = your original onComplete function, you can make it public if needed
-        [SerializeField] private CookingEvents cookingEvents;  
+        public UnityEvent onWrongItem;
+        [SerializeField] private CookingEvents cookingEvents;
 
         PlateItem[] placed;
+        DishData currentDish;
         bool complete;
+        float lastRejectTime = -10f;
 
         public bool IsComplete { get { return complete; } }
-        public string DishName { get { return dishName; } }
+        public DishData Dish { get { return complete ? currentDish : null; } }
+        public string DishName { get { return Dish != null ? Dish.displayName : ""; } }
 
         void Awake()
         {
@@ -37,18 +39,33 @@ namespace Alyssa
             foreach (Collider col in Physics.OverlapBox(boxCenter, halfExtents, zone.transform.rotation))
             {
                 PlateItem item = col.GetComponentInParent<PlateItem>();
-                if (item == null || item.plated || item.IsHeld()) continue;
-                if (!string.IsNullOrEmpty(acceptedItem) && item.itemName != acceptedItem) continue;
+                if (item == null || item.plated || item.dish == null || item.IsHeld()) continue;
+
+                if (currentDish != null && item.dish != currentDish)
+                {
+                    Reject();
+                    continue;
+                }
 
                 int slot = NearestFreeSlot(item.transform.position);
                 if (slot < 0) return;
 
+                currentDish = item.dish;
                 placed[slot] = item;
                 item.Lock(slots[slot]);
                 onItemPlated.Invoke();
-            }
 
-            UpdateComplete();
+                UpdateComplete();
+                if (complete) return;
+            }
+        }
+
+        void Reject()
+        {
+            if (Time.time - lastRejectTime < rejectCooldown) return;
+
+            lastRejectTime = Time.time;
+            onWrongItem.Invoke();
         }
 
         void UpdateComplete()
@@ -57,9 +74,12 @@ namespace Alyssa
             foreach (PlateItem p in placed)
                 if (p != null) filled++;
 
-            bool nowComplete = slots.Length > 0 && filled == slots.Length;
-            // same usage as before, using Invoke() to fire
-            if (nowComplete && !complete) cookingEvents.OnCompleted.Invoke();
+            if (filled == 0) currentDish = null;
+
+            int required = currentDish != null ? Mathf.Min(currentDish.piecesPerDish, slots.Length) : 0;
+            bool nowComplete = required > 0 && filled >= required;
+
+            if (nowComplete && !complete && cookingEvents != null) cookingEvents.OnCompleted.Invoke();
             complete = nowComplete;
         }
 

@@ -71,15 +71,22 @@ MonoBehaviour:
   hitCooldown: 0.35
   requiresBoard: 0
   requireZone: 0
+  blockers: []
+  unblockDelay: 1
+  requiredTool: 0
   perHitResults: []
   finalResults:
   - prefab: {fileID: 4149859686391981556, guid: 09ece255c0a10ec4b9cc75e6ff2812fd, type: 3}
+    spawnAt: {fileID: 0}
     localOffset: {x: 0, y: 0, z: 0}
-    resourceName: 
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
     resourceAmount: 0
   - prefab: {fileID: 5184896979433054411, guid: 53c9457bcf51bc042b563416e2a15d20, type: 3}
+    spawnAt: {fileID: 0}
     localOffset: {x: 0, y: 0, z: 0}
-    resourceName: 
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
     resourceAmount: 0
   hideOnHit: []
   popForce: 0.2
@@ -96,6 +103,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onWrongSpot:
+    m_PersistentCalls:
+      m_Calls: []
+  onBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongTool:
     m_PersistentCalls:
       m_Calls: []
   boardContacts: 0
@@ -170,15 +183,22 @@ MonoBehaviour:
   hitCooldown: 0.35
   requiresBoard: 0
   requireZone: 0
+  blockers: []
+  unblockDelay: 1
+  requiredTool: 0
   perHitResults: []
   finalResults:
   - prefab: {fileID: 703736864425442746, guid: 8bfaadf5ce58a8e4cbe1ee677ce6214d, type: 3}
+    spawnAt: {fileID: 0}
     localOffset: {x: 0, y: 0, z: 0}
-    resourceName: 
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
     resourceAmount: 0
   - prefab: {fileID: 2145674658480338895, guid: 45d13db79175d6847a1383ec02190722, type: 3}
+    spawnAt: {fileID: 0}
     localOffset: {x: 0, y: 0, z: 0}
-    resourceName: 
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
     resourceAmount: 0
   hideOnHit: []
   popForce: 0.2
@@ -195,6 +215,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onWrongSpot:
+    m_PersistentCalls:
+      m_Calls: []
+  onBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongTool:
     m_PersistentCalls:
       m_Calls: []
   boardContacts: 0
@@ -336,11 +362,16 @@ MonoBehaviour:
   hitCooldown: 0.35
   requiresBoard: 0
   requireZone: 0
+  blockers: []
+  unblockDelay: 1
+  requiredTool: 0
   perHitResults: []
   finalResults:
   - prefab: {fileID: 1283188137764116020, guid: 74d84ccb383e81e409198ef8d61d448e, type: 3}
+    spawnAt: {fileID: 0}
     localOffset: {x: 0, y: 0, z: 0}
-    resourceName: 
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
     resourceAmount: 0
   hideOnHit: []
   popForce: 0.2
@@ -359,6 +390,12 @@ MonoBehaviour:
   onWrongSpot:
     m_PersistentCalls:
       m_Calls: []
+  onBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongTool:
+    m_PersistentCalls:
+      m_Calls: []
   boardContacts: 0
 --- !u!1 &7751560649302075420
 GameObject:
@@ -375,6 +412,7 @@ GameObject:
   - component: {fileID: 413556964031547746}
   - component: {fileID: 259184775184073837}
   - component: {fileID: 7410954310444280318}
+  - component: {fileID: 3946661918691059304}
   m_Layer: 0
   m_Name: Tuna_001
   m_TagString: Untagged
@@ -653,21 +691,40 @@ MonoBehaviour:
   hitCooldown: 0.35
   requiresBoard: 1
   requireZone: 1
+  blockers: []
+  unblockDelay: 1
+  requiredTool: 0
   perHitResults: []
   finalResults:
   - prefab: {fileID: 7581318844355409337, guid: 12e7a7b476235084f843b38747defbb3, type: 3}
+    spawnAt: {fileID: 0}
     localOffset: {x: 0, y: 0, z: 0}
-    resourceName: 
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
     resourceAmount: 0
   - prefab: {fileID: 4942318235746411989, guid: d1c16a6f56e155d47af69958305adb7d, type: 3}
+    spawnAt: {fileID: 0}
     localOffset: {x: 0, y: 0, z: 0}
-    resourceName: 
+    localEuler: {x: 0, y: 0, z: 0}
+    resource: {fileID: 0}
     resourceAmount: 0
   hideOnHit: []
   popForce: 0.5
   onHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7751560649302075420}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onFinalCut:
     m_PersistentCalls:
       m_Calls: []
@@ -680,4 +737,28 @@ MonoBehaviour:
   onWrongSpot:
     m_PersistentCalls:
       m_Calls: []
+  onBlocked:
+    m_PersistentCalls:
+      m_Calls: []
+  onWrongTool:
+    m_PersistentCalls:
+      m_Calls: []
   boardContacts: 0
+--- !u!114 &3946661918691059304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751560649302075420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a7ec87ccd6debf45a0d3f140d28af17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.SoundPlayer
+  clips: []
+  volume: 1
+  pitchRange: {x: 0.95, y: 1.05}
+  scaleWithSpeed: 0
+  speedRange: {x: 1, y: 5}
+  volumeRange: {x: 0.5, y: 1}
