@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Tuna Roll
   m_EditorClassIdentifier: Assembly-CSharp::Alyssa.DishData
   displayName: Tuna Roll Plate
-  piecesPerDish: 6
+  piecesPerDish: 3
   price: 0
