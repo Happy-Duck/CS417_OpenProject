@@ -17,6 +17,8 @@ namespace _Sharyq
         private float timeVariance = 3f;
         [SerializeField]
         private int maxFihh = 5;
+        [SerializeField]
+        private Hook hookObj;
 
         [Header("Debug")] 
         [SerializeField] 
@@ -64,8 +66,9 @@ namespace _Sharyq
                 Random.Range(-spawnRange, spawnRange)
             );
             
-            Instantiate(fihhPrefabs[randomIndex], transform.position + randomPosition, Quaternion.identity);
-            
+            var fihh = Instantiate(fihhPrefabs[randomIndex], transform.position + randomPosition, Quaternion.identity).GetComponent<FishNavigation>();
+            Debug.Log("FIHH SPAWNED");
+            fihh.HookObj = hookObj;
             _currentTime = 0f;
             currentFihh++;
             CreateMaxTime();

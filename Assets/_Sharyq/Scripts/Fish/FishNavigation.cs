@@ -1,7 +1,8 @@
 using System;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
-using Math = Unity.Mathematics.Geometry.Math;
+using Random = UnityEngine.Random;
 
 namespace _Sharyq
 {
@@ -62,13 +63,24 @@ namespace _Sharyq
 
         private void Start()
         {
-            Vector3 pos = GenerateRandomPosition();
+            Vector3 pos = HookObj.transform.position;
+            TryGetRandomNavMeshPosition(out pos);
             navMeshAgent.SetDestination(pos);
         }
-
-        private Vector3 GenerateRandomPosition()
+        
+        private bool TryGetRandomNavMeshPosition(out Vector3 position)
         {
-            return Vector3.zero;
+            Vector3 center = transform.position;
+            Vector3 randomPoint = center + Random.insideUnitSphere * smellRange;
+
+            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, smellRange, NavMesh.AllAreas))
+            {
+                position = hit.position;
+                return true;
+            }
+
+            position = center;
+            return false;
         }
 
         private void Update()
