@@ -5,6 +5,8 @@ namespace _Sharyq
     [RequireComponent(typeof(Rigidbody))]
     public class Hook : MonoBehaviour
     {
+        public FishNavigation Fish;
+        
         [SerializeField] private Transform rodTip;
         [SerializeField] private RopeBuilder rope;
         [SerializeField] private bool inWater;
