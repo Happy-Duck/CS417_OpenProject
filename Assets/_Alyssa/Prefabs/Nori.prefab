@@ -181,6 +181,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4058734408142439232}
   m_LocalEulerAnglesHint: {x: -47, y: 90, z: 0}
+--- !u!1 &5557730142867193234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6928863264252201260}
+  m_Layer: 0
+  m_Name: PreviewAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6928863264252201260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557730142867193234}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.302, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6711547498551019234}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6228447810165660760
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +227,7 @@ GameObject:
   - component: {fileID: 2442746640536138014}
   - component: {fileID: -3580942790651385254}
   - component: {fileID: 8451393737107203314}
+  - component: {fileID: 4831907701447004753}
   m_Layer: 0
   m_Name: Nori
   m_TagString: Untagged
@@ -219,6 +251,7 @@ Transform:
   - {fileID: 73111682279338675}
   - {fileID: 5524525146818427906}
   - {fileID: 4058734408142439232}
+  - {fileID: 6928863264252201260}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6664245455677198482
@@ -466,6 +499,34 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onRollComplete:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4831907701447004753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6228447810165660760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e64167ab15b624ab82eee407cd78d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.NoriRoller
+  builder: {fileID: 0}
+  handlePrefab: {fileID: 2817759434974186067, guid: 26b8fd528b6cabb8db5729b50ab2d7cb, type: 3}
+  previewAnchor: {fileID: 6928863264252201260}
+  fallbackRolledPrefab: {fileID: 0}
+  rollDirection: {x: 1, y: 0, z: 0}
+  length: 0.6
+  previewLengthAxis: 2
+  spins: 2
+  handleHeight: 0.03
+  finishAt: 0.95
+  onRollStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onRolled:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &7049605651493578638

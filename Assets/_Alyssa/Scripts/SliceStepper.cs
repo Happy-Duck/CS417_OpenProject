@@ -17,6 +17,9 @@ namespace Alyssa
         public Transform scaler;
         public Transform guide;
 
+        [Tooltip("Tick for rolls: FinishedRoll supplies the slice prefab and count after spawning")]
+        public bool waitForConfigure;
+
         Cuttable cuttable;
         BoxCollider box;
         Vector3 baseScale;
@@ -24,11 +27,28 @@ namespace Alyssa
         Vector3 baseBoxCenter;
         float step;
         int hitCount;
+        bool ready;
 
         int Axis { get { return (int)axis; } }
 
         void Awake()
         {
+            if (!waitForConfigure) Setup();
+        }
+
+        public void Configure(GameObject prefab, int count)
+        {
+            if (ready) return;
+            if (prefab != null) slicePrefab = prefab;
+            if (count > 0) slices = count;
+            Setup();
+        }
+
+        void Setup()
+        {
+            if (ready) return;
+            ready = true;
+
             slices = Mathf.Max(2, slices);
             step = length / slices;
 
@@ -73,7 +93,6 @@ namespace Alyssa
             float removed = hitCount * step;
             float factor = Mathf.Max((length - removed) / length, 0.001f);
 
-            // Shrinking about the root center, then shifting, keeps the far end fixed
             if (scaler != null)
             {
                 Vector3 scale = baseScale;

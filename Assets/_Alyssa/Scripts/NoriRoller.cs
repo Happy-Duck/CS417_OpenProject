@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -10,17 +11,16 @@ namespace Alyssa
         public enum Axis { X, Y, Z }
 
         public RollBuilder builder;
-        public GameObject handlePrefab;     // grabbable bar spawned at the near edge
-        public Transform rolledPreview;     // rolled mesh, child of the nori, placed at the FINAL pose
-        public GameObject rolledPrefab;     // full grabbable roll that replaces the nori at the end
+        public GameObject handlePrefab;
+        [Tooltip("Empty child at the FINAL pose of the rolled roll (far edge, resting on the mat)")]
+        public Transform previewAnchor;
+        [Tooltip("Used only if a recipe has no Rolled Prefab assigned")]
+        public GameObject fallbackRolledPrefab;
 
-        [Tooltip("Axis-aligned, in nori local space. Use (-1,0,0) if it rolls the wrong way.")]
         public Vector3 rollDirection = Vector3.right;
-        [Tooltip("Flat nori size along the roll direction, in nori local units")]
         public float length = 0.6f;
-        [Tooltip("The long axis of the rolled mesh, in the preview's local space")]
         public Axis previewLengthAxis = Axis.Z;
-        public int spins = 2;               // whole turns; negative reverses the spin
+        public int spins = 2;
         public float handleHeight = 0.03f;
         [Range(0.5f, 1f)] public float finishAt = 0.95f;
 
@@ -32,27 +32,21 @@ namespace Alyssa
         Vector3 dir;
         Transform flatRoot;
 
+        GameObject rolledPrefab;
+        Transform rolledPreview;
+        Vector3 previewFinalPos, previewBaseScale;
+        Quaternion previewBaseRot;
+
         GameObject handle;
         Component handleGrab;
         PropertyInfo handleSelected;
         Vector3 handleRestLocal;
         Quaternion handleLocalRot;
 
-        Vector3 previewFinalPos, previewBaseScale;
-        Quaternion previewBaseRot;
-
         void Awake()
         {
             if (builder == null) builder = GetComponent<RollBuilder>();
             dir = rollDirection.normalized;
-
-            if (rolledPreview != null)
-            {
-                previewFinalPos = rolledPreview.localPosition;
-                previewBaseRot = rolledPreview.localRotation;
-                previewBaseScale = rolledPreview.localScale;
-                rolledPreview.gameObject.SetActive(false);
-            }
         }
 
         void Update()
@@ -73,7 +67,6 @@ namespace Alyssa
         {
             started = true;
 
-            // Nori can't be picked up while it's being rolled
             foreach (MonoBehaviour m in GetComponents<MonoBehaviour>())
                 if (m != null && m.GetType().Name == "XRGrabInteractable") m.enabled = false;
 
@@ -84,11 +77,50 @@ namespace Alyssa
 
             List<Transform> kids = new List<Transform>();
             foreach (Transform c in transform)
-                if (c != rolledPreview && c != flatRoot) kids.Add(c);
+                if (c != flatRoot && c != previewAnchor) kids.Add(c);
             foreach (Transform c in kids) c.SetParent(flatRoot, true);
 
+            // Pick the prefab for the recipe that was just completed
+            RollData recipe = builder != null ? builder.Roll : null;
+            rolledPrefab = (recipe != null && recipe.rolledPrefab != null) ? recipe.rolledPrefab : fallbackRolledPrefab;
+
+            SpawnPreview();
             SpawnHandle();
             onRollStart.Invoke();
+        }
+
+        void SpawnPreview()
+        {
+            if (rolledPrefab == null || previewAnchor == null) return;
+
+            GameObject g = Instantiate(rolledPrefab, previewAnchor.position, previewAnchor.rotation, transform);
+            rolledPreview = g.transform;
+
+            previewFinalPos = rolledPreview.localPosition;
+            previewBaseRot = rolledPreview.localRotation;
+            previewBaseScale = rolledPreview.localScale;
+
+            foreach (Collider c in g.GetComponentsInChildren<Collider>()) c.enabled = false;
+            Rigidbody rb = g.GetComponent<Rigidbody>();
+            if (rb != null) rb.isKinematic = true;
+
+            // Scripts that other components depend on go a frame later
+            Cuttable cut = g.GetComponent<Cuttable>();
+            foreach (MonoBehaviour m in g.GetComponentsInChildren<MonoBehaviour>())
+                if (m != null && m != cut) Destroy(m);
+
+            StartCoroutine(DestroyNextFrame(g, cut, rb));
+            g.SetActive(false);
+        }
+
+        IEnumerator DestroyNextFrame(GameObject g, Cuttable cut, Rigidbody rb)
+        {
+            yield return null;
+            if (cut != null) Destroy(cut);
+            if (rb != null) Destroy(rb);
+            if (g != null)
+                foreach (LineRenderer lr in g.GetComponentsInChildren<LineRenderer>(true))
+                    Destroy(lr.gameObject);
         }
 
         void SpawnHandle()
@@ -125,13 +157,11 @@ namespace Alyssa
                 Vector3 local = transform.InverseTransformPoint(handle.transform.position);
                 float p = (Vector3.Dot(local, dir) + length * 0.5f) / length;
 
-                // Progress only moves forward, so it can't be unrolled
                 progress = Mathf.Max(progress, Mathf.Clamp01(p));
                 if (progress >= finishAt) Finish();
             }
             else
             {
-                // Released early: park the handle at the current roll position
                 handle.transform.SetPositionAndRotation(
                     transform.TransformPoint(handleRestLocal + dir * (progress * length)),
                     transform.rotation * handleLocalRot);
@@ -142,7 +172,6 @@ namespace Alyssa
         {
             float p = Mathf.Clamp(progress, 0.001f, 0.999f);
 
-            // Flat part shrinks toward the far edge
             Vector3 axisMask = new Vector3(Mathf.Abs(dir.x), Mathf.Abs(dir.y), Mathf.Abs(dir.z));
             flatRoot.localScale = Vector3.one - axisMask * p;
 
@@ -151,7 +180,6 @@ namespace Alyssa
             rolledPreview.gameObject.SetActive(progress > 0.01f);
             rolledPreview.localPosition = previewFinalPos - dir * length * (1f - p);
 
-            // Grows across its cross-section, keeps full length
             Vector3 grow = new Vector3(p, p, p);
             grow[(int)previewLengthAxis] = 1f;
             rolledPreview.localScale = Vector3.Scale(previewBaseScale, grow);
@@ -166,15 +194,11 @@ namespace Alyssa
             finished = true;
             onRolled.Invoke();
 
-            if (rolledPrefab != null && rolledPreview != null)
+            if (rolledPrefab != null && previewAnchor != null)
             {
-                Transform parent = rolledPreview.parent;
-                Vector3 pos = parent.TransformPoint(previewFinalPos);
-                Quaternion rot = parent.rotation * previewBaseRot;
-
-                GameObject done = Instantiate(rolledPrefab, pos, rot);
+                GameObject done = Instantiate(rolledPrefab, previewAnchor.position, previewAnchor.rotation);
                 FinishedRoll fr = done.GetComponent<FinishedRoll>();
-                if (fr != null) fr.roll = builder != null ? builder.Roll : null;
+                if (fr != null) fr.Init(builder != null ? builder.Roll : null);
             }
 
             if (handle != null) Destroy(handle);

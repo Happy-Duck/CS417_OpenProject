@@ -18,5 +18,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5433efb36b4d54c41bca1952eb8558fd, type: 2}
   - {fileID: 11400000, guid: 5433efb36b4d54c41bca1952eb8558fd, type: 2}
   - {fileID: 11400000, guid: 5433efb36b4d54c41bca1952eb8558fd, type: 2}
+  rolledPrefab: {fileID: 5384413099924338017, guid: 2bce187a5dcf6a4e293ee1571fff12bd, type: 3}
   piecesWhenSliced: 6
   price: 0

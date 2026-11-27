@@ -6,8 +6,10 @@ namespace Alyssa
     public class RollData : ScriptableObject
     {
         public string displayName;
-        public IngredientData[] ingredients;   // the recipe; list an ingredient twice to require two
-        public int piecesWhenSliced = 6;       // for the slicing step
+        public IngredientData[] ingredients;
+        public GameObject rolledPrefab;        // the whole roll
+        public GameObject slicePrefab;         // one cut piece of this roll
+        public int piecesWhenSliced = 6;
         public float price;
     }
 }
