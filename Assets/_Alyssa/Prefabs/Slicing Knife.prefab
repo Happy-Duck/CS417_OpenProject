@@ -12,6 +12,17 @@ PrefabInstance:
       propertyPath: toolType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1636505396872519403, guid: 3c1b01e1958951d4eab2f54dd1289c74, type: 3}
+      propertyPath: message
+      value: '
+
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1636505396872519403, guid: 3c1b01e1958951d4eab2f54dd1289c74, type: 3}
+      propertyPath: 'pages.Array.data[0]'
+      value: Slicing Knife
+      objectReference: {fileID: 0}
     - target: {fileID: 2803348719363647364, guid: 3c1b01e1958951d4eab2f54dd1289c74, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2

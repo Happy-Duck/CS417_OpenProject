@@ -813,6 +813,81 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8114363, y: 0.091864586, z: 2.7613268}
   m_Center: {x: 0.012149632, y: -0.15222095, z: -0.0062942505}
+--- !u!1 &2820097123755247149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 689531695538502724}
+  - component: {fileID: 8937838126133353075}
+  m_Layer: 0
+  m_Name: IntroTutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &689531695538502724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2820097123755247149}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.21, y: 2.452, z: -15.141}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6997947133253812169}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8937838126133353075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2820097123755247149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7dbdbadcee2854eb743ea728c9ed7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.TutorialPopup
+  title: Preparing Fish
+  message: 
+  pages:
+  - Welcome to the Kitchen! To get started, set the fish on the cutting board, you
+    can only cut there.
+  - 'Make sure to chose the right knife! The knife at the bottom left is the chopping
+    knife, thats for breaking down the fish into small pieces. '
+  - The bottom right knife is the skinning knife, needed to remove the skin off a
+    fish.
+  - The smallest knife at the top right is the slicing knife. You wont need that
+    one until later, its for cutting delicately.
+  - Swing the chopping knife quickly through the glowing pulse outline to chop!
+  id: 
+  triggerMode: 0
+  showDistance: 1.5
+  requireConfirm: 1
+  hideAfterSeconds: 6
+  offset: {x: 0, y: 0.4, z: 0}
+  characterSize: 0.008
+  onlyWhenPlaced: 0
+  style:
+    background: {r: 0.07, g: 0.09, b: 0.14, a: 0.95}
+    accent: {r: 1, g: 0.82, b: 0.2, a: 1}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    buttonTextColor: {r: 0.07, g: 0.09, b: 0.14, a: 1}
+    maxCharsPerLine: 32
+    nextLabel: Next
+    confirmLabel: Got it
+  onConfirmed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3211100529334557980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,6 +1586,7 @@ GameObject:
   - component: {fileID: 8568848353596938168}
   - component: {fileID: 5033772309552933196}
   - component: {fileID: 7231679630495207928}
+  - component: {fileID: 564462598271174857}
   m_Layer: 0
   m_Name: Spoon
   m_TagString: Untagged
@@ -1527,7 +1603,7 @@ Transform:
   m_GameObject: {fileID: 5803401979258234869}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0064388686, y: -0.6442075, z: -0.0076441374, w: 0.7647855}
-  m_LocalPosition: {x: -0.1717, y: 2.337, z: -13.3656}
+  m_LocalPosition: {x: -0.007, y: 2.334, z: -13.395}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1769,8 +1845,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8624158, y: 0.36100617, z: 1}
-  m_Center: {x: -2.2030909e-10, y: -0.000000014873624, z: 0.5}
+  m_Size: {x: 0.7, y: 0.2, z: 1}
+  m_Center: {x: -2.2030909e-10, y: 0.1, z: 0.5}
 --- !u!114 &5033772309552933196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1887,6 +1963,43 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &564462598271174857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5803401979258234869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7dbdbadcee2854eb743ea728c9ed7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.TutorialPopup
+  title: Cooked Rice
+  message: Do the thing.
+  pages:
+  - Pick up the spoon, and dip it into the bowl of rice to get some rice on the spoon.
+  - Once Rice is on the spoon, put the spoon near a piece of Nori to spread rice
+    onto it.
+  id: 
+  triggerMode: 0
+  showDistance: 1.5
+  requireConfirm: 1
+  hideAfterSeconds: 6
+  offset: {x: 0, y: 0.4, z: 0}
+  characterSize: 0.008
+  onlyWhenPlaced: 0
+  style:
+    background: {r: 0.07, g: 0.09, b: 0.14, a: 0.95}
+    accent: {r: 1, g: 0.82, b: 0.2, a: 1}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    buttonTextColor: {r: 0.07, g: 0.09, b: 0.14, a: 1}
+    maxCharsPerLine: 32
+    nextLabel: Next
+    confirmLabel: Got it
+  onConfirmed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6010652866581948751
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,7 +2350,7 @@ Transform:
   m_GameObject: {fileID: 8227922122529710316}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.004, y: 2.172, z: -12.142}
+  m_LocalPosition: {x: 0.193, y: 2.172, z: -12.177}
   m_LocalScale: {x: 1.6929746, y: 1.6929754, z: 1.6929746}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2431,7 +2544,8 @@ Transform:
   - {fileID: 316283601507307112}
   - {fileID: 2126673266398359188}
   - {fileID: 5123708359659851793}
-  - {fileID: 1791943462461010791}
+  - {fileID: 689531695538502724}
+  - {fileID: 2332471796417081451}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 86.449, z: 0}
 --- !u!1 &9106690265347993341
@@ -2444,6 +2558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9079951554225254526}
   - component: {fileID: 7928329369105474049}
+  - component: {fileID: 8935499100192640972}
   m_Layer: 0
   m_Name: Plate Stack
   m_TagString: Untagged
@@ -2489,6 +2604,41 @@ MonoBehaviour:
   respawnDelay: 0.5
   popInTime: 0.2
   onResupply:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8935499100192640972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9106690265347993341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7dbdbadcee2854eb743ea728c9ed7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.TutorialPopup
+  title: Plating
+  message: 
+  pages:
+  - 'Take a plate from the stack and place it down to use it. '
+  id: 
+  triggerMode: 0
+  showDistance: 2
+  requireConfirm: 1
+  hideAfterSeconds: 6
+  offset: {x: 0, y: 0.4, z: 0}
+  characterSize: 0.008
+  onlyWhenPlaced: 0
+  style:
+    background: {r: 0.07, g: 0.09, b: 0.14, a: 0.95}
+    accent: {r: 1, g: 0.82, b: 0.2, a: 1}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    buttonTextColor: {r: 0.07, g: 0.09, b: 0.14, a: 1}
+    maxCharsPerLine: 32
+    nextLabel: Next
+    confirmLabel: Got it
+  onConfirmed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &36947037373406634
@@ -2921,7 +3071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8977345806277898124, guid: 43b960ffa7320a444be3b81093599508, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.0973613
+      value: 2.102
       objectReference: {fileID: 0}
     - target: {fileID: 8977345806277898124, guid: 43b960ffa7320a444be3b81093599508, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3186,6 +3336,80 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2921246186770239767, guid: 8ac47bef7a2083b4d827d1e464d1105e, type: 3}
   m_PrefabInstance: {fileID: 1450423230542472166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1482284018423665606
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6997947133253812169}
+    m_Modifications:
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.33859503
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3385951
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.33859503
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.446
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.862
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -17.145
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6848587
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7286759
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797287701311517021, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+      propertyPath: m_Name
+      value: Slicing Knife
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+--- !u!4 &2332471796417081451 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
+  m_PrefabInstance: {fileID: 1482284018423665606}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1672354673881048749
 PrefabInstance:
@@ -3833,80 +4057,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1228813860991308759, guid: 4505dd6825aba64469e8ddd892077512, type: 3}
   m_PrefabInstance: {fileID: 2987383049696835077}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &3175874321729802442
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6997947133253812169}
-    m_Modifications:
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.33859503
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3385951
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.33859503
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.325
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.929
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -17.168
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6848587
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7286759
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8797287701311517021, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_Name
-      value: Slicing Knife
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
---- !u!4 &1791943462461010791 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-  m_PrefabInstance: {fileID: 3175874321729802442}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3445242356800981439
 PrefabInstance:
@@ -4599,15 +4749,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2327501210643046520, guid: d974ae50042b36c4a8514dd75b6f548b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2327501210643046520, guid: d974ae50042b36c4a8514dd75b6f548b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2327501210643046520, guid: d974ae50042b36c4a8514dd75b6f548b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2327501210643046520, guid: d974ae50042b36c4a8514dd75b6f548b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4660,6 +4810,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3100484975030172354, guid: d974ae50042b36c4a8514dd75b6f548b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2294084137726377197}
+    - targetCorrespondingSourceObject: {fileID: 3100484975030172354, guid: d974ae50042b36c4a8514dd75b6f548b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2539227806623135944}
   m_SourcePrefab: {fileID: 100100000, guid: d974ae50042b36c4a8514dd75b6f548b, type: 3}
 --- !u!1 &8209806819397432668 stripped
 GameObject:
@@ -4688,6 +4841,42 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2281181758045951794, guid: 9bcd1c17d1a59a545b49eaaf05adfa4f, type: 3}
+--- !u!114 &2539227806623135944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8209806819397432668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7dbdbadcee2854eb743ea728c9ed7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.TutorialPopup
+  title: Nori
+  message: "\n "
+  pages:
+  - Take a Nori from the Box, and place it on the bamboo roll.
+  - 'Nori costs one Seaweed, so you need to collect Seaweed Before using '
+  id: 
+  triggerMode: 0
+  showDistance: 1.5
+  requireConfirm: 1
+  hideAfterSeconds: 6
+  offset: {x: 0, y: 0.4, z: 0}
+  characterSize: 0.008
+  onlyWhenPlaced: 0
+  style:
+    background: {r: 0.07, g: 0.09, b: 0.14, a: 0.95}
+    accent: {r: 1, g: 0.82, b: 0.2, a: 1}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    buttonTextColor: {r: 0.07, g: 0.09, b: 0.14, a: 1}
+    maxCharsPerLine: 32
+    nextLabel: Next
+    confirmLabel: Got it
+  onConfirmed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &8837407594985500646 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2327501210643046520, guid: d974ae50042b36c4a8514dd75b6f548b, type: 3}

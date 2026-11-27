@@ -222,6 +222,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2790518711711860003, guid: 65a99454abe0c1546972817712fb59a6, type: 3}
+    - {fileID: 6198297049543778711, guid: 65a99454abe0c1546972817712fb59a6, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65a99454abe0c1546972817712fb59a6, type: 3}
@@ -528,63 +529,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1001 &1554735098
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 24.836
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.834
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 20.229
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 3804622268935381933, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8797287701311517021, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
-      propertyPath: m_Name
-      value: Slicing Knife
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e5744b56aa3d6438e99def4d811922e5, type: 3}
 --- !u!1 &1685874544
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,4 +628,3 @@ SceneRoots:
   - {fileID: 751207056}
   - {fileID: 698561740}
   - {fileID: 1163924356}
-  - {fileID: 1554735098}

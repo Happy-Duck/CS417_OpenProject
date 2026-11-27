@@ -630,6 +630,7 @@ MonoBehaviour:
   sliceEuler: {x: 0, y: 0, z: 0}
   scaler: {fileID: 2295129795195889675}
   guide: {fileID: 9075184101230538871}
+  waitForConfigure: 0
 --- !u!114 &-6230612692064116983
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 7255800766440428314}
   - component: {fileID: 7852190800399039744}
   - component: {fileID: -5233191690499637817}
+  - component: {fileID: 1636505396872519403}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -405,3 +406,40 @@ MonoBehaviour:
   bladePoint: {fileID: 7141820123871604842}
   toolType: 0
   debugSpeed: 0
+--- !u!114 &1636505396872519403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7511436319030883700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7dbdbadcee2854eb743ea728c9ed7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.TutorialPopup
+  title: 
+  message: '
+
+'
+  pages:
+  - Chopping Knife
+  id: 
+  triggerMode: 1
+  showDistance: 1.5
+  requireConfirm: 0
+  hideAfterSeconds: 3
+  offset: {x: 0, y: 0.4, z: 0}
+  characterSize: 0.008
+  onlyWhenPlaced: 0
+  style:
+    background: {r: 0.07, g: 0.09, b: 0.14, a: 0.95}
+    accent: {r: 1, g: 0.82, b: 0.2, a: 1}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    buttonTextColor: {r: 0.07, g: 0.09, b: 0.14, a: 1}
+    maxCharsPerLine: 32
+    nextLabel: Next
+    confirmLabel: Got it
+  onConfirmed:
+    m_PersistentCalls:
+      m_Calls: []

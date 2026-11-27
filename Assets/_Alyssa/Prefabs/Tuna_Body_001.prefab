@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6761119978502167043}
   - component: {fileID: 6860905107365056672}
   - component: {fileID: 5554387614978315960}
+  - component: {fileID: -1849972221455934022}
   m_Layer: 0
   m_Name: Tuna_Body_001
   m_TagString: Untagged
@@ -271,3 +272,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1878688, y: 0.73911834, z: 1.6234751}
   m_Center: {x: 0.0061001778, y: 0, z: -0.038389444}
+--- !u!114 &-1849972221455934022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4942318235746411989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7dbdbadcee2854eb743ea728c9ed7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Alyssa.TutorialPopup
+  title: Fish Scraps
+  message: Drop fish scraps into the bait bucket down below to turn them into bait.
+  pages: []
+  id: ScrapTutorial
+  triggerMode: 0
+  showDistance: 1.5
+  requireConfirm: 0
+  hideAfterSeconds: 6
+  offset: {x: 0, y: 0.2, z: 0}
+  characterSize: 0.008
+  onlyWhenPlaced: 0
+  style:
+    background: {r: 0.07, g: 0.09, b: 0.14, a: 0.95}
+    accent: {r: 1, g: 0.82, b: 0.2, a: 1}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    buttonTextColor: {r: 0.07, g: 0.09, b: 0.14, a: 1}
+    maxCharsPerLine: 32
+    nextLabel: Next
+    confirmLabel: Got it
+  onConfirmed:
+    m_PersistentCalls:
+      m_Calls: []
